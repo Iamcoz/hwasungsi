@@ -1,0 +1,74 @@
+/* 채팅 박스 */
+#chat-box {
+    z-index: 1000;
+    position: fixed; /* absolute에서 fixed로 변경하여 항상 화면 아래에 위치하도록 합니다. */
+    bottom: 100px;   /* 채팅 박스와 입력창 간의 간격을 조정합니다. */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 300px;
+    border: 1px solid rgba(0,0,0,0.2);
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 8px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 채팅 입력창 및 시작 박스 */
+.chat-input, #entry-box {
+    z-index: 1000;
+    display: flex;
+    padding: 10px;
+    width: 500px;
+    position: fixed; /* absolute에서 fixed로 변경하여 항상 화면 아래에 위치하도록 합니다. */
+    bottom: 10px;    /* 화면 하단과의 간격을 조정합니다. */
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#chat-box, .chat-input {
+    display: none; /* 초기 상태에서 숨김 */
+}
+
+#nickname-entry, #message {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 8px;
+    margin-right: 5px;
+}
+
+#nickname-entry {
+    margin-bottom: 10px;
+}
+
+#startChat, #sendBtn {
+    margin-left: 5px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+#startChat:hover, #sendBtn:hover {
+    background-color: #0056b3;
+}
+
+#users-online {
+    background-color: rgba(0, 123, 255, 0.1);
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.system-message {
+    text-align: center;
+}
