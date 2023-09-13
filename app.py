@@ -14,8 +14,21 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 online_users = 0
 
-@app.route('/')
+# index.html에서 JS를 사용해 세션에서 encrypted_user_id를 가져올 수 있는 엔드포인트
+@app.route('/get_encrypted_user_id')
+def get_encrypted_user_id():
+    return {'encrypted_user_id': session.get('encrypted_user_id')}
+
+
+@app.route('/index')
 def index():
+
+    user_id = request.args.get('user_id')
+    
+    # 암호화된 user_id를 세션에 저장
+    if user_id:
+        session['encrypted_user_id'] = user_id
+
     # 각 사용자에게 고유한 세션 ID 할당
     if 'user_id' not in session:
         session['user_id'] = str(uuid.uuid4())

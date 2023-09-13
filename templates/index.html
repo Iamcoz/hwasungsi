@@ -21,6 +21,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
   <!-- Chat -->
   <link rel="stylesheet" href="/static/css/chat_style.css">
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -199,6 +201,21 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
   <script src="/static/js/chat.js"></script>
   <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+  <!-- 암호화된 user_id -->
+  <script>
+    $(document).ready(function(){
+        $.ajax({
+            url: '/get_encrypted_user_id',
+            method: 'GET',
+            success: function(data) {
+                console.log('Encrypted User ID:', data.encrypted_user_id);
+                // 여기에서 encrypted_user_id를 사용하여 필요한 작업을 수행할 수 있습니다.
+            }
+        });
+    });
+    </script>
+    
 
 </body>
 
