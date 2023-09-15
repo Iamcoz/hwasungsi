@@ -152,12 +152,14 @@
 
 
         <div class="button_area">
-            <button onClick="window.open('https://github.com/rekixia/rekixia/releases/download/%ED%99%94%EC%84%B1/default.Zip')" class="btn">PC</button>
-            <button onClick="window.open('https://github.com/rekixia/rekixia/releases/download/%ED%99%94%EC%84%B1/humanf.apk')" class="btn">모바일</button>
-            <span class="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'});">
-                <i class="fa-solid fa-circle-chevron-up item button-rainbow"></i>
-            </span>
+          <button onClick="window.open('https://github.com/rekixia/rekixia/releases/download/%ED%99%94%EC%84%B1/default.Zip')" class="btn">PC</button>
+          <button onClick="window.open('https://github.com/rekixia/rekixia/releases/download/%ED%99%94%EC%84%B1/humanf.apk')" class="btn">모바일</button>
+          <button id="goToWebGL" class="btn">생태 교육 컨텐츠로 이동</button>
+          <span class="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'});">
+            <i class="fa-solid fa-circle-chevron-up item button-rainbow"></i>
+          </span>
         </div>
+        
 
 
         <div class="plants_area">
@@ -205,16 +207,29 @@
   <!-- 암호화된 user_id -->
   <script>
     $(document).ready(function(){
-        $.ajax({
-            url: '/get_encrypted_user_id',
-            method: 'GET',
-            success: function(data) {
-                console.log('Encrypted User ID:', data.encrypted_user_id);
-                // 여기에서 encrypted_user_id를 사용하여 필요한 작업을 수행할 수 있습니다.
-            }
-        });
+      let encryptedUserId; // 암호화된 user_id를 저장할 변수
+  
+      $.ajax({
+          url: '/get_encrypted_user_id',
+          method: 'GET',
+          success: function(data) {
+              console.log('Encrypted User ID:', data.encrypted_user_id);
+              encryptedUserId = data.encrypted_user_id; // 암호화된 user_id 저장
+              // 여기에서 encrypted_user_id를 사용하여 필요한 작업을 수행할 수 있습니다.
+          }
+      });
+  
+      // WebGL 페이지로 넘어가는 버튼에 클릭 이벤트 핸들러 추가
+      $('#goToWebGL').on('click', function() {
+        if (encryptedUserId) {
+          window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId; // WebGL 페이지 URL에 user_id 매개변수 추가하여 리다이렉션
+        } else {
+          alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.'); // user_id가 아직 로드되지 않은 경우
+        }
+      });
     });
-    </script>
+  </script>
+  
     
 
 </body>

@@ -3,8 +3,6 @@ from flask_socketio import SocketIO, emit, join_room
 import os
 import uuid
 
-# print("Current working directory:", os.getcwd())
-
 app = Flask(__name__, static_folder="static", template_folder="templates")
 
 # 비밀 키 설정
@@ -42,7 +40,7 @@ def to_webgl():
     encrypted_user_id = session.get('encrypted_user_id')
     
     # WebGL 페이지 URL
-    webgl_url = "http://your_webgl_page_url_here.com" # 이 부분 실제 webGL URL로 수정 필요
+    webgl_url = "http://0.0.0.0:5555" # 이 부분 실제 webGL URL로 수정 필요
     
     # 암호화된 user_id를 query parameter로 추가
     if encrypted_user_id:
