@@ -40,7 +40,8 @@
               <i class="fa-solid fa-circle-chevron-left"></i>
               <p class="back_to_portal">화성시 포탈로이동</p>
             </a>
-            <button class="admin_button" onclick="window.location.href='http://192.168.110.10:3000'">게시판</button>
+            <!-- <button class="admin_button" onclick="window.location.href='http://192.168.110.10:3000'">게시판</button> -->
+            <button class="admin_button" onclick="window.location.href='http://localhost:3000'">게시판</button>
           </div>
           <div class="menu row justify-content-center text_area">
             <p class="title col-lg-6 lead masthead-subheading">화성시 <br />스마트 그린도시</p>
@@ -152,8 +153,6 @@
 
 
         <div class="button_area">
-          <button onClick="window.open('https://github.com/rekixia/rekixia/releases/download/%ED%99%94%EC%84%B1/default.Zip')" class="btn">PC</button>
-          <button onClick="window.open('https://github.com/rekixia/rekixia/releases/download/%ED%99%94%EC%84%B1/humanf.apk')" class="btn">모바일</button>
           <button id="goToWebGL" class="btn">생태 교육 컨텐츠로 이동</button>
           <span class="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'});">
             <i class="fa-solid fa-circle-chevron-up item button-rainbow"></i>
@@ -223,6 +222,8 @@
       $('#goToWebGL').on('click', function() {
         if (encryptedUserId) {
           window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId; // WebGL 페이지 URL에 user_id 매개변수 추가하여 리다이렉션
+          // http://192.168.110.10:8080?user_id=
+          // http://hsgreenedu.or.kr/
         } else {
           alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.'); // user_id가 아직 로드되지 않은 경우
         }
