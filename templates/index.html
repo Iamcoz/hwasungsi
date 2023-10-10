@@ -36,7 +36,7 @@
       <section class="box">
         <div class="my-5 centered_box">
           <div class="menu column">
-            <a href="#" class="back col-lg-6">
+            <a href="http://192.168.110.77:9600/" class="back col-lg-6">
               <i class="fa-solid fa-circle-chevron-left"></i>
               <p class="back_to_portal">화성시 포탈로이동</p>
             </a>
@@ -221,8 +221,9 @@
       // WebGL 페이지로 넘어가는 버튼에 클릭 이벤트 핸들러 추가
       $('#goToWebGL').on('click', function() {
         if (encryptedUserId) {
-          window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId; // WebGL 페이지 URL에 user_id 매개변수 추가하여 리다이렉션
+          window.location.href = 'http://192.168.110.10:8080?user_id=' + encryptedUserId; // WebGL 페이지 URL에 user_id 매개변수 추가하여 리다이렉션
           // http://192.168.110.10:8080?user_id=
+          // http://localhost:5555?user_id=
           // http://hsgreenedu.or.kr/
         } else {
           alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.'); // user_id가 아직 로드되지 않은 경우
@@ -230,9 +231,5 @@
       });
     });
   </script>
-  
-    
-
 </body>
-
 </html>
