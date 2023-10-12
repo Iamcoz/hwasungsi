@@ -40,7 +40,7 @@ def to_webgl():
     encrypted_user_id = session.get('encrypted_user_id')
     
     # WebGL 페이지 URL
-    webgl_url = "http://192.168.110.10:5555" # 이 부분 실제 webGL URL로 수정 필요
+    webgl_url = "http://192.168.110.10:8080" # 이 부분 실제 webGL URL로 수정 필요
     # webgl_url = "http://localhost:5555"
     
     # 암호화된 user_id를 query parameter로 추가
@@ -69,8 +69,7 @@ def on_join(data):
 
 @socketio.on('leave')
 def on_leave(data):
-    emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 나갔습니다.', 'type': 'System'}, broadcast=True)
-
+    emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 나갔습니다.', 'type': 'System'}, broadcast=True)   # 주석
 
 @socketio.on('message')
 def handle_message(data):
@@ -96,3 +95,4 @@ def on_disconnect():
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000)
+    #socketio.run(app, host='0.0.0.0', port=5000)

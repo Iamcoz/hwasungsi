@@ -44,20 +44,20 @@ nav {
 	font-weight: bolder;
 	color: #232123;
 	z-index: 100;
-	background: url(../images/배경/수풀레이어-4.png) no-repeat center/cover;
+	background: url(../images/background/thickForestLayer-4.png) no-repeat center/cover;
 }
 
 .layers {
 	/* width: 100%; */
 	width: 100vw;
 	height: 60vh;
-	background: url(../images/배경/수풀레이어-3.png) no-repeat center/cover;
+	background: url(../images/background/thickForestLayer-3.png) no-repeat center/cover;
 }
 
 .forest {
 	width: 100vw;
 	height: 50vh;
-	background: url(../images/배경/수풀레이어-2.png) no-repeat center/cover;
+	background: url(../images/background/thickForestLayer-2.png) no-repeat center/cover;
 }
 
 .box {
@@ -86,7 +86,7 @@ nav {
   right: 0px;
   bottom: 0px;
   height: 1080px;
-  /* background: url('images/배경.png') no-repeat center/cover;
+  /* background: url('images/background.png') no-repeat center/cover;
 } */
 .text_area {
 	/* margin-top: 100px; */
@@ -588,7 +588,7 @@ span.topbtn {
 	left: 0;
 	z-index: -2;
 	position: fixed;
-	background: url(../images/배경/수풀레이어-1.png) no-repeat center bottom/cover;
+	background: url(../images/background/thickForestLayer-1.png) no-repeat center bottom/cover;
 	width: 100vw;
 	height: 100vh;
 }
