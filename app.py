@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = 'a_very_complex_secret_key'
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 online_users = 0
-
+connected_users = {}  # 사용자 관리를 위한 딕셔너리
 
 # index.html에서 JS를 사용해 세션에서 encrypted_user_id를 가져올 수 있는 엔드포인트
 @app.route('/get_encrypted_user_id')
@@ -40,7 +40,8 @@ def to_webgl():
     encrypted_user_id = session.get('encrypted_user_id')
     
     # WebGL 페이지 URL
-    webgl_url = "http://0.0.0.0:5555" # 이 부분 실제 webGL URL로 수정 필요
+    webgl_url = "http://192.168.110.10:5555" # 이 부분 실제 webGL URL로 수정 필요
+    # webgl_url = "http://localhost:5555"
     
     # 암호화된 user_id를 query parameter로 추가
     if encrypted_user_id:
@@ -58,12 +59,12 @@ def on_connect():
 @socketio.on('join')
 def on_join(data):
     global online_users
-    # 세션 ID를 기반으로 온라인 사용자 추적
-    if not session.get('connected'):
+    user_socket_id = request.sid
+    if user_socket_id not in connected_users:
+        connected_users[user_socket_id] = data["nickname"]
         online_users += 1
-        session['connected'] = True
         emit('update_online_count', online_users, broadcast=True)
-    emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 들어왔습니다.', 'type': 'System'}, broadcast=True)
+        emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 들어왔습니다.', 'type': 'System'}, broadcast=True)
 
 
 @socketio.on('leave')
@@ -75,16 +76,21 @@ def on_leave(data):
 def handle_message(data):
     emit('message', data, broadcast=True)
 
+# 사용자가 브라우저 창이나 탭을 닫았을 때 호출되는 함수
+@socketio.on('client_disconnect')
+def client_disconnect():
+    on_disconnect()
 
 @socketio.on('disconnect')
 def on_disconnect():
     global online_users
-    # 세션 ID를 기반으로 온라인 사용자 추적
-    if session.get('connected'):
+    user_socket_id = request.sid
+    if user_socket_id in connected_users:
+        nickname = connected_users.pop(user_socket_id)
         online_users -= 1
         if online_users < 0:    # 음수 방지 
             online_users = 0
-        session['connected'] = False
+        emit('message', {'nickname': '', 'message': f'{nickname}님이 나갔습니다.', 'type': 'System'}, broadcast=True)
         emit('update_online_count', online_users, broadcast=True)
 
 
