@@ -15,6 +15,10 @@ pip install flask flask_socketio eventlet pycryptodome
 ```
 flask run
 ```
+-> http://localhost:5000
+
+### Exit
+command(ctrl) + c
 
 ---
 #### python version
