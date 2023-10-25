@@ -1,6 +1,10 @@
 # hwasungsi
 FrontEnd + webSocket Chat  
 
+#### 채팅 관련 소스코드
+* static/css/chat_style.css
+* static/js/chat.js
+* templates/index.html
 
 
 ### Install
@@ -9,7 +13,6 @@ pip install flask flask_socketio eventlet pycryptodome
 ```
 
 ### Run
-conda activate cozToy
 ```
 flask run
 ```
