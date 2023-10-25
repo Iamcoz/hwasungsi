@@ -1,10 +1,9 @@
-# hwasungsi
-FrontEnd + webSocket Chat  
+# hs 프로젝트 FrontEnd + webSocket Chat  
 
 #### 채팅 관련 소스코드
 * static/css/chat_style.css
 * static/js/chat.js
-* templates/index.html
+* templates/index.html
 
 
 ### Install
