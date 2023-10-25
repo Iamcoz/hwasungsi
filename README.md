@@ -6,7 +6,7 @@
 * templates/index.html
 
 
-### Install
+### Install 의존성 모듈 (requirements.txt)
 ```
 pip install flask flask_socketio eventlet pycryptodome
 ```
