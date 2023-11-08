@@ -8,7 +8,9 @@ app = Flask(__name__, static_folder="static", template_folder="templates")
 # 비밀 키 설정
 app.config['SECRET_KEY'] = 'a_very_complex_secret_key'
 # socketio = SocketIO(app)
-socketio = SocketIO(app, cors_allowed_origins="*")
+# socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", ping_interval=5, ping_timeout=10)
+
 
 online_users = 0
 connected_users = {}  # 사용자 관리를 위한 딕셔너리
@@ -40,7 +42,8 @@ def to_webgl():
     encrypted_user_id = session.get('encrypted_user_id')
     
     # WebGL 페이지 URL
-    webgl_url = "http://192.168.110.10:8080" # 이 부분 실제 webGL URL로 수정 필요
+    # webgl_url = "http://192.168.110.10:8081" # 이 부분 실제 webGL URL로 수정 필요
+    webgl_url = "https://172.16.10.120:8081"
     # webgl_url = "http://localhost:5555"
     
     # 암호화된 user_id를 query parameter로 추가
@@ -67,9 +70,9 @@ def on_join(data):
         emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 들어왔습니다.', 'type': 'System'}, broadcast=True)
 
 
-@socketio.on('leave')
-def on_leave(data):
-    emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 나갔습니다.', 'type': 'System'}, broadcast=True)   # 주석
+# @socketio.on('leave')
+# def on_leave(data):
+#     emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 나갔습니다.', 'type': 'System'}, broadcast=True)
 
 @socketio.on('message')
 def handle_message(data):
@@ -77,7 +80,7 @@ def handle_message(data):
 
 # 사용자가 브라우저 창이나 탭을 닫았을 때 호출되는 함수
 @socketio.on('client_disconnect')
-def client_disconnect():
+def client_disconnect(data):
     on_disconnect()
 
 @socketio.on('disconnect')
@@ -92,7 +95,5 @@ def on_disconnect():
         emit('message', {'nickname': '', 'message': f'{nickname}님이 나갔습니다.', 'type': 'System'}, broadcast=True)
         emit('update_online_count', online_users, broadcast=True)
 
-
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000)
-    #socketio.run(app, host='0.0.0.0', port=5000)

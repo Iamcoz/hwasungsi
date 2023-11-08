@@ -75,11 +75,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    window.addEventListener('beforeunload', function() {
-        if (userNickname) {
-            socket.emit('leave', { nickname: userNickname });
-        }
-    });
+    // window.addEventListener('beforeunload', function() {
+    //     if (userNickname) {
+    //         socket.emit('leave', { nickname: userNickname });
+    //     }
+    // });
 
     // 사용자가 브라우저 창이나 탭을 닫을 때의 이벤트 핸들러
     window.addEventListener('beforeunload', function () {
