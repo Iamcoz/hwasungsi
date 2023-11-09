@@ -36,11 +36,13 @@
       <section class="box">
         <div class="my-5 centered_box">
           <div class="menu column">
-            <a href="http://192.168.110.76:8888/" class="back col-lg-6">
-              <i class="fa-solid fa-circle-chevron-left"></i>
-              <p class="back_to_portal">화성시 포탈로이동</p>
+            <!-- <a href="http://192.168.110.76:8888/" class="back col-lg-6"> 시민포탈 도메인 -->
+            <a href="https://greencityhs.or.kr/" class="back col-lg-6"></a>
+            <i class="fa-solid fa-circle-chevron-left"></i>
+            <p class="back_to_portal">화성시 포탈로이동</p>
             </a>
-            <button class="admin_button" onclick="window.location.href='http://192.168.110.10:3000'">게시판</button>
+            <button class="admin_button" onclick="window.location.href='https://172.16.10.120:3000'">게시판</button>
+            <!-- <button class="admin_button" onclick="window.location.href='https://172.16.10.120:3000'">게시판</button> -->
             <!-- <button class="admin_button" onclick="window.location.href='http://localhost:3000'">게시판</button> -->
           </div>
           <div class="menu row justify-content-center text_area">
@@ -50,14 +52,11 @@
               체험학습
             </p>
           </div>
-
           <span class="down_arrow"><i class="fa-solid fa-circle-chevron-down item"></i></span>
         </div>
         <span data-diagram="bird" class="col-md-6 model_bird">
-          <!-- <canvas class="webgl"></canvas> -->
         </span>
       </section>
-
       <div class="bg-image bg-image-full"></div>
     </div>
   </header>
@@ -86,10 +85,9 @@
             <div class="dashed_circle left"></div>
             <div class="solid_circle left"></div>
             <div class="ani_sec frog">
-                <img class="frog_img" src="../static/images/frog.png" />
-              </div>
+              <img class="frog_img" src="../static/images/frog.png" />
+            </div>
             <span data-diagram="frog" class="col-md-6 ani_sec frog">
-              <!-- <canvas class="webgl1"></canvas> -->
             </span>
           </div>
         </div>
@@ -104,10 +102,9 @@
             <div class="dashed_circle right"></div>
             <div class="solid_circle right"></div>
             <div class="ani_sec otter">
-                <img class="otter_img" src="../static/images/otter.png" />
-              </div>
+              <img class="otter_img" src="../static/images/otter.png" />
+            </div>
             <span data-diagram="otter" class="col-md-6 ani_sec otter">
-              <!-- <canvas class="webgl1"></canvas> -->
             </span>
           </div>
           <div class="underline"></div>
@@ -124,8 +121,8 @@
             <div class="dashed_circle left"></div>
             <div class="solid_circle left"></div>
             <div class="ani_sec catfish">
-                <img class="catfish_img" src="../static/images/catfish.png" />
-              </div>
+              <img class="catfish_img" src="../static/images/catfish.png" />
+            </div>
             <span data-diagram="dragon_fly" class="col-md-6 ani_sec dragon_fly">
           </div>
         </div>
@@ -134,7 +131,6 @@
 
     <div id="enter bg-dark">
       <div class="ground">
-
 
         <!-- Chat -->
         <div id="entry-box">
@@ -149,17 +145,12 @@
           <input type="text" id="message" placeholder="메시지를 입력하세요.">
           <button id="sendBtn">보내기</button>
         </div>
-
-
         <div class="button_area">
           <button id="goToWebGL" class="btn">생태 교육 컨텐츠로 이동</button>
           <span class="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'});">
             <i class="fa-solid fa-circle-chevron-up item button-rainbow"></i>
           </span>
         </div>
-        
-
-
         <div class="plants_area">
           <img class="forest1" src="../static/images/thickForest/Layer6.png" alt="" />
           <img class="forest2" src="../static/images/thickForest/Layer7.png" alt="" />
@@ -178,55 +169,74 @@
   <!-- Core theme JS-->
   <script src="../static/js/scripts.js"></script>
   <script src="../static/js/script.js"></script>
-  <!-- <script type="importmap">
-      {
-        "imports": {
-          "three": "../three/build/three.module.js",
-          "three/examples/jsm/controls/OrbitControls": "../three/examples/jsm/controls/OrbitControls.js"
-        }
-      }
-    </script> -->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-  <!-- * *                               SB Forms JS                               * *-->
-  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-  <!-- <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
-  <!-- <script type="module" src="index.js"></script> -->
   <script type="module" src="../static/js/index.js"></script>
-  <!-- <script type="module" src="test.js"></script> -->
 
   <!-- Chat -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
   <script src="/static/js/chat.js"></script>
   <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
-  <!-- 암호화된 user_id -->
   <script>
-    $(document).ready(function(){
-      let encryptedUserId; // 암호화된 user_id를 저장할 변수
-  
+    $(document).ready(function () {
+      // 암호화된 user_id를 저장할 변수
+      let encryptedUserId;
+
+      // 암호화된 user_id를 가져옵니다.
       $.ajax({
-          url: '/get_encrypted_user_id',
-          method: 'GET',
-          success: function(data) {
-              console.log('Encrypted User ID:', data.encrypted_user_id);
-              encryptedUserId = data.encrypted_user_id; // 암호화된 user_id 저장
-          }
-      });
-  
-      // WebGL 페이지로 넘어가는 버튼에 클릭 이벤트 핸들러 추가
-      $('#goToWebGL').on('click', function() {
-        if (encryptedUserId) {
-          // window.location.href = 'http://192.168.110.10:8081?user_id=' + encryptedUserId; // WebGL 페이지 URL에 user_id 매개변수 추가하여 리다이렉션
-          window.location.href = 'https://172.16.10.120:8081?user_id=' + encryptedUserId;
-          // window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId;
-          // http://hsgreenedu.or.kr/
-        } else {
-          alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.'); // user_id가 아직 로드되지 않은 경우
+        url: '/get_encrypted_user_id',
+        method: 'GET',
+        success: function (data) {
+          // console.log('Encrypted User ID:', data.encrypted_user_id);
+          encryptedUserId = data.encrypted_user_id; // 암호화된 user_id 저장
         }
       });
+
+      // WebGL 페이지로 넘어가는 버튼에 클릭 이벤트 핸들러 추가
+      $('#goToWebGL').on('click', function () {
+        if (encryptedUserId) {
+          window.location.href = 'https://172.16.10.120:8081?user_id=' + encryptedUserId; // WebGL 페이지 URL에 user_id 매개변수 추가하여 리다이렉션
+          // window.location.href = 'http://192.168.110.10:8081?user_id=' + encryptedUserId; 
+          // window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId;
+        } else {
+          // user_id가 아직 로드되지 않은 경우
+          alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.');
+        }
+      });
+
+      // URL에서 user_id 파라미터를 가져옵니다.
+      const queryParams = new URLSearchParams(window.location.search);
+      const userId = queryParams.get('user_id');
+
+      // user_id가 없거나 공백이거나, 서버에서 유효하지 않다는 응답을 받으면 메인 페이지로 리다이렉션합니다.
+      if (!userId || userId.trim() === '') {
+        alert('유효하지 않은 접근입니다.');
+        window.location.href = '메인페이지_URL'; // 여기에 메인페이지의 실제 URL을 삽입하세요.
+      } else {
+        // 서버에 user_id의 유효성 검사를 요청합니다.
+        $.ajax({
+          url: '/api/saveSessions', // 백엔드 api url
+          method: 'POST',
+          contentType: "application/json",
+          data: JSON.stringify({ userId: userId, startTime: new Date(), endTime: new Date() }),
+          dataType: "json",
+          success: function (response) {
+            if (!response.decryptedId) {
+              // 서버에서 암호화된 ID를 반환하지 않으면, 이는 유효하지 않은 ID를 의미합니다.
+              alert('잘못된 ID입니다.');
+              window.location.href = '메인페이지_URL'; // 메인 페이지 URL로 교체하세요.
+            }
+            // 서버에서 유효한 user_id라는 응답을 받으면, 페이지 로딩을 계속합니다.
+          },
+          error: function () {
+            // 서버 요청 자체에 실패한 경우
+            alert('유효성 검사를 수행할 수 없습니다. 다시 시도해 주세요.');
+            window.location.href = '메인페이지_URL'; // 메인 페이지 URL로 교체하세요.
+          }
+        });
+      }
     });
   </script>
+
 </body>
 </html>
