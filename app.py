@@ -42,8 +42,8 @@ def to_webgl():
     encrypted_user_id = session.get('encrypted_user_id')
     
     # WebGL 페이지 URL
-    # webgl_url = "http://192.168.110.10:8081" # 이 부분 실제 webGL URL로 수정 필요
-    webgl_url = "https://172.16.10.120:8081"
+    webgl_url = "https://www.hsgreenedu.or.kr/webgl"     # 이 부분 실제 webGL URL로 수정 필요
+    # webgl_url = "https://172.16.10.120:8081"
     # webgl_url = "http://localhost:5555"
     
     # 암호화된 user_id를 query parameter로 추가
