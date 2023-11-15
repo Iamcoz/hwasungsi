@@ -212,11 +212,11 @@
       // user_id가 없거나 공백이거나, 서버에서 유효하지 않다는 응답을 받으면 메인 페이지로 리다이렉션합니다.
       if (!userId || userId.trim() === '') {
         alert('유효하지 않은 접근입니다.');
-        window.location.href = 'https://greencityhs.or.kr/'; // 시민포탈로 리턴
+        window.location.href = 'http://greencityhs.or.kr/'; // 시민포탈로 리턴
       } else {
         // XMLHttpRequest 사용
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/saveSessions', true);
+        xhr.open('POST', 'http://172.16.10.120:3000/api/saveSessions', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
