@@ -36,12 +36,13 @@
       <section class="box">
         <div class="my-5 centered_box">
           <div class="menu column">
+            <!-- <a href="http://192.168.110.76:8888/" class="back col-lg-6"> 시민포탈 도메인 -->
             <a href="https://greencityhs.or.kr/" class="back col-lg-6"></a>
             <i class="fa-solid fa-circle-chevron-left"></i>
             <p class="back_to_portal">화성시 포탈로이동</p>
             </a>
             <button class="admin_button"
-              onclick="window.location.href='https://hsgreenedu.or.kr:442/index/board'">게시판</button>
+              onclick="window.location.href='https://hsgreenedu.or.kr:442/board'">게시판</button>
             <!-- <button class="admin_button" onclick="window.location.href='https://172.16.10.120:3000'">게시판</button> -->
             <!-- <button class="admin_button" onclick="window.location.href='http://localhost:3000'">게시판</button> -->
           </div>
@@ -214,22 +215,16 @@
         alert('유효하지 않은 접근입니다.');
         window.location.href = 'https://greencityhs.or.kr/'; // 시민포탈로 리턴
       } else {
+        // XMLHttpRequest 사용
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", '/api/saveSessions', true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-
+        xhr.open('POST', '/api/saveSessions', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            var status = xhr.status;
-            if (status === 0 || (status >= 200 && status < 400)) {
-              // 성공적으로 응답 받음
-              var response = JSON.parse(xhr.responseText);
-              if (!response.decryptedId) {
-                alert('잘못된 ID입니다.');
-                window.location.href = 'https://greencityhs.or.kr/';
-              }
+          if (xhr.readyState === 4) {
+            var response = JSON.parse(xhr.responseText);
+            if (xhr.status === 200 && response.decryptedId) {
+              // 성공 로직
             } else {
-              // 에러 처리
               alert('유효성 검사를 수행할 수 없습니다. 다시 시도해 주세요.');
               window.location.href = 'https://greencityhs.or.kr/';
             }
