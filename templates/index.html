@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>화성시 스마트 그린도시 생태습지 체험학습</title>
+  <title>화성시 스마트 그린도시 생태 체험</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico"/>
   <!-- Font Awesome icons (free version)-->
@@ -36,10 +36,9 @@
       <section class="box">
         <div class="my-5 centered_box">
           <div class="menu column">
-            <!-- <a href="http://192.168.110.76:8888/" class="back col-lg-6"> 시민포탈 도메인 -->
-            <a href="https://greencityhs.or.kr/" class="back col-lg-6"></a>
+            <a href="https://greencityhs.or.kr/" class="back col-lg-6"></a> <!-- 시민포탈 -->
             <i class="fa-solid fa-circle-chevron-left"></i>
-            <p class="back_to_portal">스마트 그린도시</p>
+            <p class="back_to_portal">스마트 그린도시 홈페이지</p>
             </a>
             <button class="admin_button" onclick="window.location.href='https://hsgreenedu.or.kr:442/board'">게시판</button>
             <!-- <button class="admin_button" onclick="window.location.href='https://172.16.10.120:3000'">게시판</button> -->
@@ -48,8 +47,7 @@
           <div class="menu row justify-content-center text_area">
             <p class="title col-lg-6 lead masthead-subheading">화성시 <br/>스마트 그린도시</p>
             <p class="grad_text mb-0 masthead-heading">
-              생태습지<br />
-              체험학습
+              생태 체험<br />
             </p>
           </div>
           <span class="down_arrow"><i class="fa-solid fa-circle-chevron-down item"></i></span>
@@ -146,7 +144,7 @@
           <button id="sendBtn">보내기</button>
         </div>
         <div class="button_area">
-          <button id="goToWebGL" class="btn">생태 교육 컨텐츠로 이동</button>
+          <button id="goToWebGL" class="btn">생태 체험 컨텐츠로 이동</button>
           <span class="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'});">
             <i class="fa-solid fa-circle-chevron-up item button-rainbow"></i>
           </span>
@@ -196,9 +194,9 @@
       $('#goToWebGL').on('click', function () {
         if (encryptedUserId) {
           // WebGL 페이지 URL에 user_id 매개변수 추가하여 리다이렉션
-          //window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encryptedUserId;
+          window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encryptedUserId;
           // window.location.href = 'https://172.16.10.120:8081?user_id=' + encryptedUserId;
-          window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId;
+          // window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId;
         } else {
           // user_id가 아직 로드되지 않은 경우
           alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.');
