@@ -39,7 +39,7 @@
             <!-- <a href="http://192.168.110.76:8888/" class="back col-lg-6"> 시민포탈 도메인 -->
             <a href="https://greencityhs.or.kr/" class="back col-lg-6"></a>
             <i class="fa-solid fa-circle-chevron-left"></i>
-            <p class="back_to_portal">화성시 포탈로이동</p>
+            <p class="back_to_portal">스마트 그린도시</p>
             </a>
             <button class="admin_button" onclick="window.location.href='https://hsgreenedu.or.kr:442/board'">게시판</button>
             <!-- <button class="admin_button" onclick="window.location.href='https://172.16.10.120:3000'">게시판</button> -->
@@ -196,9 +196,9 @@
       $('#goToWebGL').on('click', function () {
         if (encryptedUserId) {
           // WebGL 페이지 URL에 user_id 매개변수 추가하여 리다이렉션
-          window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encryptedUserId;
+          //window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encryptedUserId;
           // window.location.href = 'https://172.16.10.120:8081?user_id=' + encryptedUserId;
-          // window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId;
+          window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId;
         } else {
           // user_id가 아직 로드되지 않은 경우
           alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.');
@@ -212,7 +212,7 @@
       // user_id가 없거나 공백이거나, 서버에서 유효하지 않다는 응답을 받으면 메인 페이지로 리다이렉션합니다.
       if (!userId || userId.trim() === '') {
         alert('유효하지 않은 접근입니다.');
-        window.location.href = 'http://greencityhs.or.kr/'; // 시민포탈로 리턴
+        window.location.href = 'https://greencityhs.or.kr/'; // 시민포탈로 리턴
       } else {
         // XMLHttpRequest 사용
         var xhr = new XMLHttpRequest();

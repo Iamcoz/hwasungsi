@@ -1,72 +1,7 @@
-// import * as THREE from './threejsFiles/three.module.js';
-// // import {GLTFLoader} from './threejsFiles/GLTFLoader.js';
-// import {OrbitControls} from './threejsFiles/OrbitControls.js';
-// import {FBXLoader} from './threejsFiles/FBXLoader.js';
-
-// const canvas = document.querySelector('.webgl1');
-
-// // Create a renderer
-// const renderer = new THREE.WebGLRenderer({canvas: canvas, alpha: true});
-// renderer.setSize(window.innerWidth, window.innerHeight);
-
-// // Create scenes and cameras for each model
-// const scenes = [];
-// const cameras = [];
-// const loadedModels = [];
-// const models = [
-//   'assets/fbx/Common_kingfisher_fly.fbx',
-//   'assets/fbx/frog_jump.fbx',
-//   'assets/fbx/otter_idle.fbx',
-//   'assets/fbx/dragonfly_idle.fbx',
-// ]; // Array to store loaded FBX models
-
-// for (let i = 0; i < models.length; i++) {
-//   console.log(models);
-//   const scene = new THREE.Scene();
-//   scenes.push(scene);
-//   console.log(scene);
-
-//   const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-//   camera.position.set(0, 2, 5);
-//   camera.lookAt(0, 0, 0);
-//   cameras.push(camera);
-
-//   // Create OrbitControls and attach them to the camera and canvas
-//   const controls = new OrbitControls(camera, canvas);
-//   controls.update();
-
-//   // Load FBX model
-//   const loader = new FBXLoader();
-//   loader.load(models[i], (model) => {
-//     console.log(model[i]);
-//     model.scale.set(1, 1, 1);
-//     scene.add(model);
-//     console.log(model);
-//     loadedModels.push(model);
-//   });
-//   // Set up lighting
-//   const light = new THREE.DirectionalLight(0xffffff, 1);
-//   light.position.set(1, 1, 1);
-//   scene.add(light);
-// }
-// // Render loop
-// function animate() {
-//   requestAnimationFrame(animate);
-
-//   for (let i = 0; i < scenes.length; i++) {
-//     controls.update();
-//     renderer.render(scenes[i], cameras[i]); // Use the same renderer for all scenes
-//   }
-// }
-
-// animate();
-
-// Import necessary modules from three.js
 import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
 import {TrackballControls} from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/TrackballControls.js";
 import {FBXLoader} from "static/threejsFiles/FBXLoader.js";
 
-// Main function to set up the scenes and render loop
 function main() {
 	// Create a canvas element for rendering
 	const canvas = document.createElement("canvas");
