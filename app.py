@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect
-from flask_socketio import SocketIO, emit, join_room
+from flask_socketio import SocketIO, emit
 import os
 import uuid
 
@@ -22,8 +22,8 @@ def get_encrypted_user_id():
 
 
 @app.route('/index')
+@app.route('/')
 def index():
-
     user_id = request.args.get('user_id')
     
     # 암호화된 user_id를 세션에 저장
@@ -49,9 +49,8 @@ def to_webgl():
     # 암호화된 user_id를 query parameter로 추가
     if encrypted_user_id:
         webgl_url += f"?user_id={encrypted_user_id}"
-    
-    # WebGL 페이지로 리다이렉트
-    return redirect(webgl_url)
+
+    return redirect(webgl_url)  # WebGL 페이지로 리다이렉트
 
 
 # 사용자가 웹페이지에 처음 접속할 때 호출되는 함수
@@ -68,11 +67,6 @@ def on_join(data):
         online_users += 1
         emit('update_online_count', online_users, broadcast=True)
         emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 들어왔습니다.', 'type': 'System'}, broadcast=True)
-
-
-# @socketio.on('leave')
-# def on_leave(data):
-#     emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 나갔습니다.', 'type': 'System'}, broadcast=True)
 
 @socketio.on('message')
 def handle_message(data):
