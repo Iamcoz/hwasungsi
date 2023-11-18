@@ -200,8 +200,7 @@
           // window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId;
         } else {
           // user_id가 아직 로드되지 않은 경우
-
-          alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.', encryptedUserId);
+          alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.');
         }
       });
 
@@ -216,7 +215,7 @@
       } else {
         // XMLHttpRequest 사용
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://172.16.10.120:3000/api/saveSessions', true);
+        xhr.open('POST', 'https://hsgreenedu.or.kr:442/api/saveSessions', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
