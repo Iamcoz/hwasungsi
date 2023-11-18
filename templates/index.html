@@ -41,7 +41,7 @@
             <p class="back_to_portal">스마트 그린도시 홈페이지</p>
             </a>
             <button class="admin_button" onclick="window.location.href='https://hsgreenedu.or.kr:442/board'">게시판 - ps 도메인</button>
-            <button class="admin_button" onclick="window.location.href='http://hsgreenedu.or.kr:3000'">게시판 - p 도메인</button>
+            <button class="admin_button" onclick="window.location.href='http://hsgreenedu.or.kr:442/board'">게시판 - p 도메인</button>
             <button class="admin_button" onclick="window.location.href='http://172.16.10.120:3000'">게시판 - ip</button>
             <!-- <button class="admin_button" onclick="window.location.href='http://localhost:3000'">게시판</button> -->
           </div>
@@ -215,7 +215,8 @@
       } else {
         // XMLHttpRequest 사용
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://172.16.10.120:3000/api/saveSessions', true);
+        // xhr.open('POST', 'http://172.16.10.120:3000/api/saveSessions', true);
+        xhr.open('POST', 'https://hsgreenedu.or.kr:442/api/saveSessions', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {

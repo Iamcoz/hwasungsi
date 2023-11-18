@@ -7,8 +7,6 @@ app = Flask(__name__, static_folder="static", template_folder="templates")
 
 # 비밀 키 설정
 app.config['SECRET_KEY'] = 'a_very_complex_secret_key'
-# socketio = SocketIO(app)
-# socketio = SocketIO(app, cors_allowed_origins="*")
 socketio = SocketIO(app, cors_allowed_origins="*", ping_interval=5, ping_timeout=10)
 
 
