@@ -36,7 +36,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/webgl')
+@app.route('/to_webgl')
 def to_webgl():
     # 암호화된 user_id 가져오기
     encrypted_user_id = session.get('encrypted_user_id')
