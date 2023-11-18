@@ -215,7 +215,7 @@
       } else {
         // XMLHttpRequest 사용
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://hsgreenedu.or.kr:442/api/saveSessions', true);
+        xhr.open('POST', 'http://172.16.10.120:3000/api/saveSessions', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
