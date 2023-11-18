@@ -1,4 +1,4 @@
-import * as THREE from "./static/threejsFiles/three.module.js";
+import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
 import {TrackballControls} from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/TrackballControls.js";
 
 function main() {
