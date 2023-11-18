@@ -1,4 +1,3 @@
-//import three.js modules
 import * as THREE from './threejsFiles/three.module.js';
 import {OrbitControls} from './threejsFiles/OrbitControls.js';
 import {FBXLoader} from './threejsFiles/FBXLoader.js';
@@ -15,13 +14,7 @@ var model;
 const loader = new FBXLoader();
 loader.load(
   'assets/fbx/Common_kingfisher_fly.fbx',
-  //what if there are more than one model to load?
-  //please answer me
   function (fbx) {
-    console.log(fbx);
-    // model = fbx.scene;
-    // const root = fbx.scene;
-    // root.scale.set(0.1, 0.1, 0.1);
     scene.add(fbx);
   },
   'assets/fbx/frog_jump.fbx',
@@ -99,138 +92,3 @@ function render() {
 }
 
 animate();
-
-// import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js';
-// import {TrackballControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/TrackballControls.js';
-
-// // Main function to set up the scenes and render loop
-// function main() {
-//   // Create a canvas element for rendering
-//   const canvas = document.querySelector('webgl1');
-//   const renderer = new THREE.WebGLRenderer({canvas, alpha: true});
-//   renderer.setScissorTest(true); // Enable scissor testing for multiple scenes
-
-//   // An array to store scene elements and rendering functions
-//   const sceneElements = [];
-
-//   // Function to add a scene to a given element
-//   function addScene(elem, fn) {
-//     const ctx = document.querySelector('canvas').getContext('2d');
-//     elem.appendChild(ctx.canvas);
-//     sceneElements.push({elem, ctx, fn});
-//   }
-
-//   // Function to create a scene with camera and controls
-//   function makeScene(elem) {
-//     const scene = new THREE.Scene();
-//     const fov = 45;
-//     const aspect = 2;
-//     const near = 0.1;
-//     const far = 2;
-//     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-//     camera.position.set(0, 1, 2);
-//     camera.lookAt(0, 0, 0);
-//     scene.add(camera);
-
-//     const controls = new TrackballControls(camera, elem);
-//     controls.noZoom = true;
-//     controls.noPan = true;
-
-//     // Add directional light to the scene
-//     const color = 0xffffff;
-//     const intensity = 1;
-//     const light = new THREE.DirectionalLight(color, intensity);
-//     light.position.set(-1, 2, 4);
-//     scene.add(light);
-
-//     return {scene, camera, controls};
-//   }
-
-//   // Scene initialization functions for different diagrams
-//   const sceneInitFunctionsByName = {
-//     box: (elem) => {
-//       const {scene, camera, controls} = makeScene(elem);
-//       const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-//       const material = new THREE.MeshPhongMaterial({color: 'red'});
-//       const mesh = new THREE.Mesh(geometry, material);
-//       scene.add(mesh);
-//       return (time, rect) => {
-//         mesh.rotation.y = time * 0.1;
-//         camera.aspect = rect.width / rect.height;
-//         camera.updateProjectionMatrix();
-//         controls.handleResize();
-//         controls.update();
-//         renderer.render(scene, camera);
-//       };
-//     },
-//     pyramid: (elem) => {
-//       const {scene, camera, controls} = makeScene(elem);
-//       const radius = 0.8;
-//       const widthSegments = 4;
-//       const heightSegments = 2;
-//       const geometry = new THREE.SphereBufferGeometry(radius, widthSegments, heightSegments);
-//       const material = new THREE.MeshPhongMaterial({
-//         color: 'blue',
-//         flatShading: true,
-//       });
-//       const mesh = new THREE.Mesh(geometry, material);
-//       scene.add(mesh);
-//       return (time, rect) => {
-//         mesh.rotation.y = time * 0.1;
-//         camera.aspect = rect.width / rect.height;
-//         camera.updateProjectionMatrix();
-//         controls.handleResize();
-//         controls.update();
-//         renderer.render(scene, camera);
-//       };
-//     },
-//   };
-
-//   // Initialize scenes and rendering functions for each diagram
-//   document.querySelectorAll('[data-diagram]').forEach((elem) => {
-//     const sceneName = elem.dataset.diagram;
-//     const sceneInitFunction = sceneInitFunctionsByName[sceneName];
-//     const sceneRenderFunction = sceneInitFunction(elem);
-//     addScene(elem, sceneRenderFunction);
-//   });
-
-//   // Render loop function
-//   function render(time) {
-//     time *= 0.001;
-
-//     for (const {elem, fn, ctx} of sceneElements) {
-//       const rect = elem.getBoundingClientRect();
-//       const {left, right, top, bottom, width, height} = rect;
-//       const rendererCanvas = renderer.domElement;
-
-//       const isOffscreen = bottom < 0 || top > window.innerHeight || right < 0 || left > window.innerWidth;
-
-//       if (!isOffscreen) {
-//         if (rendererCanvas.width < width || rendererCanvas.height < height) {
-//           renderer.setSize(width, height, false);
-//         }
-
-//         if (ctx.canvas.width !== width || ctx.canvas.height !== height) {
-//           ctx.canvas.width = width;
-//           ctx.canvas.height = height;
-//         }
-
-//         renderer.setScissor(0, 0, width, height);
-//         renderer.setViewport(0, 0, width, height);
-
-//         fn(time, rect);
-
-//         ctx.globalCompositeOperation = 'copy';
-//         ctx.drawImage(rendererCanvas, 0, rendererCanvas.height - height, width, height, 0, 0, width, height);
-//       }
-//     }
-
-//     requestAnimationFrame(render);
-//   }
-
-//   // Start the render loop
-//   requestAnimationFrame(render);
-// }
-
-// // Call the main function to set up scenes and start rendering
-// main();
