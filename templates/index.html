@@ -8,7 +8,7 @@
   <meta name="author" content="" />
   <title>화성시 스마트 그린도시 생태 체험</title>
   <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico"/>
+  <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" />
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
   <!-- Google fonts-->
@@ -40,13 +40,15 @@
             <i class="fa-solid fa-circle-chevron-left"></i>
             <p class="back_to_portal">스마트 그린도시 홈페이지</p>
             </a>
-            <button class="admin_button" onclick="window.location.href='https://hsgreenedu.or.kr:442/board'">게시판 - ps 도메인</button>
-            <button class="admin_button" onclick="window.location.href='http://hsgreenedu.or.kr:442/board'">게시판 - p 도메인</button>
+            <button class="admin_button" onclick="window.location.href='https://hsgreenedu.or.kr:442/board'">게시판 - ps
+              도메인</button>
+            <button class="admin_button" onclick="window.location.href='http://hsgreenedu.or.kr:442/board'">게시판 - p
+              도메인</button>
             <button class="admin_button" onclick="window.location.href='http://172.16.10.120:3000'">게시판 - ip</button>
             <!-- <button class="admin_button" onclick="window.location.href='http://localhost:3000'">게시판</button> -->
           </div>
           <div class="menu row justify-content-center text_area">
-            <p class="title col-lg-6 lead masthead-subheading">화성시 <br/>스마트 그린도시</p>
+            <p class="title col-lg-6 lead masthead-subheading">화성시 <br />스마트 그린도시</p>
             <p class="grad_text mb-0 masthead-heading">
               생태 체험<br />
             </p>
@@ -213,25 +215,31 @@
         alert('유효하지 않은 접근입니다.');
         window.location.href = 'https://greencityhs.or.kr/'; // 시민포탈로 리턴
       } else {
-        // XMLHttpRequest 사용
         var xhr = new XMLHttpRequest();
-        // xhr.open('POST', 'http://172.16.10.120:3000/api/saveSessions', true);
         xhr.open('POST', 'https://hsgreenedu.or.kr:442/api/saveSessions', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
-            var response = JSON.parse(xhr.responseText);
-            if (xhr.status === 200 && response.decryptedId) {
-              // 성공 로직
-            } else {
-              alert('유효성 검사를 수행할 수 없습니다. 다시 시도해 주세요.');
-              window.location.href = 'https://greencityhs.or.kr/';
+            console.log("Response Text: ", xhr.responseText); // 콘솔에 응답 내용 출력
+            try {
+              var response = JSON.parse(xhr.responseText);
+              if (xhr.status === 200 && response.decryptedId) {
+                // 성공 로직
+              } else {
+                alert('유효성 검사를 수행할 수 없습니다. 다시 시도해 주세요.');
+                // window.location.href = 'https://greencityhs.or.kr/';
+              }
+            } catch (e) {
+              console.error("Error parsing response: ", e); // JSON 파싱 오류 출력
+              // 적절한 오류 처리 로직
             }
           }
         };
         xhr.send(JSON.stringify({ userId: userId }));
+
       }
     });
   </script>
 </body>
+
 </html>
