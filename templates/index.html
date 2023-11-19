@@ -215,7 +215,7 @@
         alert('유효하지 않은 접근입니다.');
         window.location.href = 'https://greencityhs.or.kr/'; // 시민포탈로 리턴
       } else {
-        fetch('https://hsgreenedu.or.kr:442/api/saveSessions', {
+        fetch('https://hsgreenedu.or.kr:442/api/validateUserId', {
           method: 'POST',
           mode : 'cors',
           headers: {
