@@ -18,9 +18,8 @@ connected_users = {}  # 사용자 관리를 위한 딕셔너리
 def get_encrypted_user_id():
     return {'encrypted_user_id': session.get('encrypted_user_id')}
 
-
-# @app.route('/main')
-@app.route('/')
+# @app.route('/')
+@app.route('/index')
 def index():
     user_id = request.args.get('user_id')
     
