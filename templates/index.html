@@ -197,7 +197,7 @@
             data: JSON.stringify({ userId: encryptedUserId }),
             success: function (response) {
               console.log("Response from server: ", response); // 성공 응답 로그
-              window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encryptedUserId;
+              window.location.href = 'https://hsgreenedu.or.kr:442/webgl/?user_id=' + encryptedUserId;
             },
             error: function (jqXHR, textStatus, errorThrown) {
               console.log("AJAX error: ", textStatus, "; Error thrown: ", errorThrown, "; jqXHR: ", jqXHR); // 오류 정보 로그
