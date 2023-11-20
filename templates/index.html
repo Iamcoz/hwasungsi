@@ -177,7 +177,13 @@
     $(document).ready(function () {
       // URL에서 user_id 파라미터를 가져오기
       const queryParams = new URLSearchParams(window.location.search);
-      const encryptedUserId = queryParams.get('user_id');
+      let encryptedUserId = queryParams.get('user_id');
+
+      // '+' 문자(url에서 +는 공백으로 인식됨)를 '%2B'로 변환
+      if (encryptedUserId) {
+        encryptedUserId = encryptedUserId.replace(/\+/g, '%2B');
+      }
+
       console.log("Encrypted User ID from URL: ", encryptedUserId); // 로그 찍기
 
       $('#goToWebGL').on('click', function () {
