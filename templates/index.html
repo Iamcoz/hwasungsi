@@ -175,88 +175,69 @@
 
   <script>
     $(document).ready(function () {
-
       // URL에서 user_id 파라미터를 가져오기
       const queryParams = new URLSearchParams(window.location.search);
       const encryptedUserId = queryParams.get('user_id');
+      console.log("Encrypted User ID from URL: ", encryptedUserId); // 로그 찍기
 
-      // // 암호화된 user_id를 저장할 변수
-      // let encryptedUserId;
-
-      // // 암호화된 user_id 가져오기
-      // $.ajax({
-      //   url: '/get_encrypted_user_id',
-      //   method: 'GET',
-      //   success: function (data) {
-      //     // console.log('Encrypted User ID:', data.encrypted_user_id);
-      //     encryptedUserId = data.encrypted_user_id; // 암호화된 user_id 저장
-      //   }
-      // });
-
-      // WebGL 페이지로 넘어가는 버튼에 클릭 이벤트 핸들러 추가
       $('#goToWebGL').on('click', function () {
-        // var encryptedUserId = new URLSearchParams(window.location.search).get('user_id');
-
         if (encryptedUserId) {
-          // API 요청을 통해 userId의 유효성 검사
+          console.log("Sending AJAX request with: ", encryptedUserId); // AJAX 요청 데이터 로그
+
           $.ajax({
             url: 'https://hsgreenedu.or.kr:442/api/validateUserId',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ userId: encryptedUserId }),
             success: function (response) {
-              // console.log(response);
-              // 성공적으로 유효한 userId인 경우 WebGL 페이지로 이동
+              console.log("Response from server: ", response); // 성공 응답 로그
               window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encodeURIComponent(encryptedUserId);
-              // window.location.href = 'https://172.16.10.120:8081?user_id=' + encryptedUserId;
-              // window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId;
             },
             error: function (jqXHR, textStatus, errorThrown) {
-              // 여기서 jqXHR 객체를 사용하여 서버의 응답을 확인합니다.
-              console.log("Error: ", jqXHR.responseText); // 서버의 응답 메시지를 로그로 출력
-              alert('오류가 발생했습니다: ' + textStatus); // 사용자에게 오류 메시지를 표시
+              console.log("AJAX error: ", textStatus, "; Error thrown: ", errorThrown, "; jqXHR: ", jqXHR); // 오류 정보 로그
+              alert('오류가 발생했습니다: ' + textStatus);
               window.location.href = 'https://greencityhs.or.kr';
             }
           });
         } else {
-          // userId가 없는 경우
           alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.');
         }
       });
-
-      // user_id가 없거나 공백이거나, 서버에서 유효하지 않다는 응답을 받으면 메인 페이지로 리다이렉션
-      // if (!userId || userId.trim() === '') {
-      //   alert('유효하지 않은 접근입니다.');
-      //   window.location.href = 'https://greencityhs.or.kr/'; // 시민포탈로 리턴
-      // } else {
-      //   fetch('https://hsgreenedu.or.kr:442/api/validateUserId', {
-      //     method: 'POST',
-      //     mode : 'cors',
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //     },
-      //     body: JSON.stringify({ userId: userId })
-      //   })
-      //     .then(response => {
-      //       if (!response.ok) {
-      //         throw new Error('Network response was not ok');
-      //       }
-      //       return response.json();
-      //     })
-      //     .then(data => {
-      //       if (data.validUserId) {
-      //         // 성공 로직
-      //       } else {
-      //         alert('존재하지 않는 사용자 아이디입니다.');
-      //         window.location.href = 'https://greencityhs.or.kr/';
-      //       }
-      //     })
-      //     .catch(error => {
-      //       console.error('There has been a problem with your fetch operation:', error);
-      //       // 적절한 오류 처리 로직
-      //     });
-      // }
     });
+
+
+    // user_id가 없거나 공백이거나, 서버에서 유효하지 않다는 응답을 받으면 메인 페이지로 리다이렉션
+    // if (!userId || userId.trim() === '') {
+    //   alert('유효하지 않은 접근입니다.');
+    //   window.location.href = 'https://greencityhs.or.kr/'; // 시민포탈로 리턴
+    // } else {
+    //   fetch('https://hsgreenedu.or.kr:442/api/validateUserId', {
+    //     method: 'POST',
+    //     mode : 'cors',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({ userId: userId })
+    //   })
+    //     .then(response => {
+    //       if (!response.ok) {
+    //         throw new Error('Network response was not ok');
+    //       }
+    //       return response.json();
+    //     })
+    //     .then(data => {
+    //       if (data.validUserId) {
+    //         // 성공 로직
+    //       } else {
+    //         alert('존재하지 않는 사용자 아이디입니다.');
+    //         window.location.href = 'https://greencityhs.or.kr/';
+    //       }
+    //     })
+    //     .catch(error => {
+    //       console.error('There has been a problem with your fetch operation:', error);
+    //       // 적절한 오류 처리 로직
+    //     });
+    // }
   </script>
 </body>
 
