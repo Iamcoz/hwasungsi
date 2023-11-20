@@ -200,16 +200,33 @@
 
       // WebGL 페이지로 넘어가는 버튼에 클릭 이벤트 핸들러 추가
       $('#goToWebGL').on('click', function () {
+        var encryptedUserId = new URLSearchParams(window.location.search).get('user_id');
+
         if (encryptedUserId) {
-          // WebGL 페이지 URL에 user_id 매개변수 추가하여 리다이렉션
-          window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encryptedUserId;
-          // window.location.href = 'https://172.16.10.120:8081?user_id=' + encryptedUserId;
-          // window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId;
+          // API 요청을 통해 userId의 유효성 검사
+          $.ajax({
+            url: 'https://hsgreenedu.or.kr:442/api/validateUserId',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ userId: encryptedUserId }),
+            success: function (response) {
+              // 성공적으로 유효한 userId인 경우 WebGL 페이지로 이동
+              window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encodeURIComponent(encryptedUserId);
+              // window.location.href = 'https://172.16.10.120:8081?user_id=' + encryptedUserId;
+              // window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId;
+            },
+            error: function () {
+              // 유효하지 않은 userId인 경우 알림 메시지 표시 및 리다이렉트
+              alert('존재하지 않는 사용자 아이디입니다.');
+              window.location.href = 'https://greencityhs.or.kr';
+            }
+          });
         } else {
-          // user_id가 아직 로드되지 않은 경우
-          alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.', encryptedUserId);
+          // userId가 없는 경우
+          alert('User ID 로딩 중, 잠시 후 다시 시도해주세요.');
         }
       });
+
 
 
 

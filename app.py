@@ -14,9 +14,9 @@ online_users = 0
 connected_users = {}  # 사용자 관리를 위한 딕셔너리
 
 # index.html에서 JS를 사용해 세션에서 encrypted_user_id를 가져올 수 있는 엔드포인트
-@app.route('/get_encrypted_user_id')
-def get_encrypted_user_id():
-    return {'encrypted_user_id': session.get('encrypted_user_id')}
+# @app.route('/get_encrypted_user_id')
+# def get_encrypted_user_id():
+#     return {'encrypted_user_id': session.get('encrypted_user_id')}
 
 # @app.route('/')
 @app.route('/index')
@@ -33,21 +33,21 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/to_webgl')
-def to_webgl():
-    # 암호화된 user_id 가져오기
-    encrypted_user_id = session.get('encrypted_user_id')
+# @app.route('/to_webgl')
+# def to_webgl():
+#     # 암호화된 user_id 가져오기
+#     encrypted_user_id = session.get('encrypted_user_id')
     
-    # WebGL 페이지 URL
-    webgl_url = "https://hsgreenedu.or.kr:442/webgl"     # 이 부분 실제 webGL URL로 수정 필요
-    # webgl_url = "https://172.16.10.120:8081"
-    # webgl_url = "http://localhost:5555"
+#     # WebGL 페이지 URL
+#     webgl_url = "https://hsgreenedu.or.kr:442/webgl"     # 이 부분 실제 webGL URL로 수정 필요
+#     # webgl_url = "https://172.16.10.120:8081"
+#     # webgl_url = "http://localhost:5555"
     
-    # 암호화된 user_id를 query parameter로 추가
-    if encrypted_user_id:
-        webgl_url += f"?user_id={encrypted_user_id}"
+#     # 암호화된 user_id를 query parameter로 추가
+#     if encrypted_user_id:
+#         webgl_url += f"?user_id={encrypted_user_id}"
 
-    return redirect(webgl_url)  # WebGL 페이지로 리다이렉트
+#     return redirect(webgl_url)  # WebGL 페이지로 리다이렉트
 
 
 # 사용자가 웹페이지에 처음 접속할 때 호출되는 함수
