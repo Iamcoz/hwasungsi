@@ -175,18 +175,13 @@
 
   <script>
     $(document).ready(function () {
-      // 전체 URL에서 쿼리 스트링 추출
-      let queryString = window.location.search.substring(1);
+      // URL에서 user_id 파라미터를 가져오기
+      const queryParams = new URLSearchParams(window.location.search);
+      let encryptedUserId = queryParams.get('user_id');
 
-      // 쿼리 스트링 파싱
-      let params = new URLSearchParams(queryString);
-      let encryptedUserId = null;
-      for (let param of params) {
-        if (param[0] === 'user_id') {
-          // '+' 문자를 '%2B'로 변환
-          encryptedUserId = param[1].replace(/\+/g, '%2B');
-          break;
-        }
+      // '+' 문자가 공백으로 변환된 것을 다시 '+'로 복원
+      if (encryptedUserId) {
+        encryptedUserId = encryptedUserId.replace(/ /g, '+');
       }
 
       console.log("Encrypted User ID from URL: ", encryptedUserId); // 로그 찍기
