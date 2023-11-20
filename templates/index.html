@@ -205,14 +205,16 @@
             contentType: 'application/json',
             data: JSON.stringify({ userId: encryptedUserId }),
             success: function (response) {
+              console.log(response);
               // 성공적으로 유효한 userId인 경우 WebGL 페이지로 이동
               window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encodeURIComponent(encryptedUserId);
               // window.location.href = 'https://172.16.10.120:8081?user_id=' + encryptedUserId;
               // window.location.href = 'http://localhost:5555?user_id=' + encryptedUserId;
             },
             error: function () {
+              console.log(response);
               // 유효하지 않은 userId인 경우 알림 메시지 표시 및 리다이렉트
-              alert('존재하지 않는 사용자 아이디입니다.');
+              alert('존재하지 않는 사용자 아이디입니다.', response);
               window.location.href = 'https://greencityhs.or.kr';
             }
           });
