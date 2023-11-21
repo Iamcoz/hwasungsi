@@ -476,8 +476,7 @@ img.frog_img {
 }
 
 .btn {
-	width: 50%;
-	height: 20%;
+	width: 100%;
 	border-radius: 40.591px;
 	font-size: 3rem;
 	font-weight: 500;
