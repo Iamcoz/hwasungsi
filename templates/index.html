@@ -191,7 +191,6 @@
       if (!encryptedUserId || encryptedUserId.trim() === '') {
         alert('로그인 후 이용해 주세요.');
         window.location.href = 'https://greencityhs.or.kr/';
-        return; // Early return to prevent further execution
       }
 
       fetch('https://hsgreenedu.or.kr:442/api/validateUserId', {
@@ -245,8 +244,6 @@
         }
       });
     });
-
-
   </script>
 </body>
 
