@@ -38,7 +38,7 @@
           <div class="menu column">
             <a href="https://greencityhs.or.kr/" class="back col-lg-6">스마트 그린도시<br>
               홈페이지</a> <!-- 시민포탈 -->
-         
+
             <button class="admin_button" onclick="window.location.href='https://hsgreenedu.or.kr:442/'">게시판</button>
             <!-- <button class="admin_button" onclick="window.location.href='http://localhost:3000'">게시판</button> -->
           </div>
@@ -49,7 +49,7 @@
               <button id="goToWebGL" class="btn">생태체험 컨텐츠로<br>이동</button>
             </p>
           </div>
-          
+
         </div>
         <span data-diagram="bird" class="col-md-6 model_bird">
         </span>
@@ -143,7 +143,7 @@
           <button id="sendBtn">보내기</button>
         </div>
         <div class="button_area">
-         
+
           <span class="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'});">
             <i class="fa-solid fa-circle-chevron-up item button-rainbow"></i>
           </span>
@@ -187,6 +187,40 @@
 
       console.log("Encrypted User ID from URL: ", encryptedUserId); // 로그 찍기
 
+      // user_id가 없거나 공백이거나, 서버에서 유효하지 않다는 응답을 받으면 메인 페이지로 리다이렉션
+      if (!encryptedUserId || encryptedUserId.trim() === '') {
+        alert('로그인 후 이용해 주세요.');
+        window.location.href = 'https://greencityhs.or.kr/';
+        return; // Early return to prevent further execution
+      }
+
+      fetch('https://hsgreenedu.or.kr:442/api/validateUserId', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId: encryptedUserId })
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (!data.validUserId) {
+            alert('유효하지 않은 사용자 아이디입니다.');
+            window.location.href = 'https://greencityhs.or.kr/';
+          }
+          // 여기에 성공 로직 추가
+        })
+        .catch(error => {
+          console.error('There has been a problem with your fetch operation:', error);
+          alert('오류가 발생했습니다.');
+          window.location.href = 'https://greencityhs.or.kr/';
+        });
+
       $('#goToWebGL').on('click', function () {
         if (encryptedUserId) {
           console.log("Sending AJAX request with: ", encryptedUserId); // AJAX 요청 데이터 로그
@@ -202,48 +236,17 @@
             },
             error: function (jqXHR, textStatus, errorThrown) {
               console.log("AJAX error: ", textStatus, "; Error thrown: ", errorThrown, "; jqXHR: ", jqXHR); // 오류 정보 로그
-              alert('오류가 발생했습니다: ' + textStatus);
+              alert('유효하지 않은 사용자 아이디입니다.');
               window.location.href = 'https://greencityhs.or.kr';
             }
           });
         } else {
-          alert('유효하지 않은 접근입니다.');
+          alert('오류가 발생했습니다.');
         }
       });
     });
 
-    // user_id가 없거나 공백이거나, 서버에서 유효하지 않다는 응답을 받으면 메인 페이지로 리다이렉션
-    if (!encryptedUserId || encryptedUserId.trim() === '') {
-      alert('로그인 후 이용해 주세요.');
-      window.location.href = 'https://greencityhs.or.kr/'; // 시민포탈로 리턴
-    } else {
-      fetch('https://hsgreenedu.or.kr:442/api/validateUserId', {
-        method: 'POST',
-        mode : 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ userId: encryptedUserId })
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(data => {
-          if (data.validUserId) {
-            // 성공 로직
-          } else {
-            alert('유효하지 않은 사용자 아이디입니다.');
-            window.location.href = 'https://greencityhs.or.kr/';
-          }
-        })
-        .catch(error => {
-          console.error('There has been a problem with your fetch operation:', error);
-          // 적절한 오류 처리 로직
-        });
-    }
+
   </script>
 </body>
 
