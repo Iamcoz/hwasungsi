@@ -187,12 +187,6 @@
 
       console.log("Encrypted User ID from URL: ", encryptedUserId); // 로그 찍기
 
-      // user_id가 없거나 공백이거나, 서버에서 유효하지 않다는 응답을 받으면 메인 페이지로 리다이렉션
-      if (!encryptedUserId || encryptedUserId.trim() === '') {
-        alert('로그인 후 이용해 주세요.');
-        window.location.href = 'https://greencityhs.or.kr/';
-      }
-
       // user_id가 없거나 공백이면 메인 페이지로 리다이렉션
       if (!encryptedUserId || encryptedUserId.trim() === '') {
         alert('로그인 후 이용해 주세요.');
