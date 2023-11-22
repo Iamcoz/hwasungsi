@@ -193,32 +193,39 @@
         window.location.href = 'https://greencityhs.or.kr/';
       }
 
-      fetch('https://hsgreenedu.or.kr:442/api/validateUserId', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ userId: encryptedUserId })
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
+      // user_id가 없거나 공백이면 메인 페이지로 리다이렉션
+      if (!encryptedUserId || encryptedUserId.trim() === '') {
+        alert('로그인 후 이용해 주세요.');
+        window.location.href = 'https://greencityhs.or.kr/';
+      } else {
+        // user_id가 있는 경우 서버에 유효성 검증 요청
+        fetch('https://hsgreenedu.or.kr:442/api/validateUserId', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ userId: encryptedUserId })
         })
-        .then(data => {
-          if (!data.validUserId) {
-            alert('유효하지 않은 사용자 아이디입니다.');
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            if (!data.validUserId) {
+              alert('유효하지 않은 사용자 아이디입니다.');
+              window.location.href = 'https://greencityhs.or.kr/';
+            }
+            // 여기에 성공 로직 추가
+          })
+          .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+            alert('오류가 발생했습니다.');
             window.location.href = 'https://greencityhs.or.kr/';
-          }
-          // 여기에 성공 로직 추가
-        })
-        .catch(error => {
-          console.error('There has been a problem with your fetch operation:', error);
-          alert('오류가 발생했습니다.');
-          window.location.href = 'https://greencityhs.or.kr/';
-        });
+          });
+      }
 
       $('#goToWebGL').on('click', function () {
         if (encryptedUserId) {
