@@ -18,10 +18,11 @@ connected_users = {}  # 사용자 관리를 위한 딕셔너리
 # def get_encrypted_user_id():
 #     return {'encrypted_user_id': session.get('encrypted_user_id')}
 
+@app.route('/')
 @app.route('/index')
 def index():
     global online_users     # index에 접속한 session 수
-    if online_users > 2:  # 접속자 수가 30을 초과하는 경우
+    if online_users > 30:  # 접속자 수가 30을 초과하는 경우
         return redirect(url_for('over_capacity'))   # over_capacity.html 로 리다이렉트
     
     user_id = request.args.get('user_id')
@@ -56,12 +57,13 @@ def over_capacity():
 #     return redirect(webgl_url)  # WebGL 페이지로 리다이렉트
 
 
-# 사용자가 웹페이지에 처음 접속할 때 호출되는 함수
+# 사용자가 메인 페이지에 처음 접속할 때 호출되는 함수
 @socketio.on('connect')
 def on_connect():
     global online_users
     online_users += 1
 
+# 채팅창 접속 시 호출되는 함수
 @socketio.on('join')
 def on_join(data):
     global online_users
@@ -71,16 +73,17 @@ def on_join(data):
         online_users += 1
         emit('update_online_count', online_users, broadcast=True)
         emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 들어왔습니다.', 'type': 'System'}, broadcast=True)
-
+웨
 @socketio.on('message')
 def handle_message(data):
     emit('message', data, broadcast=True)
 
-# 사용자가 브라우저 창이나 탭을 닫았을 때 호출되는 함수
+# 사용자가 웹페이지에서 나갔을 때 호출되는 함수
 @socketio.on('client_disconnect')
 def client_disconnect(data):
     on_disconnect()
 
+# 사용자가 
 @socketio.on('disconnect')
 def on_disconnect():
     global online_users
