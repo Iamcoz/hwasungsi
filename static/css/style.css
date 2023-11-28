@@ -799,7 +799,6 @@ svg {
 }
 
 @media (max-width: 320px) {
-
 	.intro_p,
 	.sec_p {
 		font-size: 0.8rem;

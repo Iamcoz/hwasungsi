@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, url_for
 from flask_socketio import SocketIO, emit
 import os
 import uuid
@@ -18,9 +18,12 @@ connected_users = {}  # 사용자 관리를 위한 딕셔너리
 # def get_encrypted_user_id():
 #     return {'encrypted_user_id': session.get('encrypted_user_id')}
 
-# @app.route('/')
 @app.route('/index')
 def index():
+    global online_users     # index에 접속한 session 수
+    if online_users > 30:  # 접속자 수가 30을 초과하는 경우
+        return redirect(url_for('over_capacity'))   # over_capacity.html 로 리다이렉트
+    
     user_id = request.args.get('user_id')
     
     # 암호화된 user_id를 세션에 저장
@@ -32,6 +35,9 @@ def index():
         session['user_id'] = str(uuid.uuid4())
     return render_template('index.html')
 
+@app.route('/over_capacity')
+def over_capacity():
+    return render_template('over_capacity.html')
 
 # @app.route('/to_webgl')
 # def to_webgl():
@@ -53,7 +59,8 @@ def index():
 # 사용자가 웹페이지에 처음 접속할 때 호출되는 함수
 @socketio.on('connect')
 def on_connect():
-    pass  # 아무런 작업 X -> 채팅 버튼애 따라 cnt 할거라
+    global online_users
+    online_users += 1
 
 @socketio.on('join')
 def on_join(data):
@@ -78,6 +85,7 @@ def client_disconnect(data):
 def on_disconnect():
     global online_users
     user_socket_id = request.sid
+    
     if user_socket_id in connected_users:
         nickname = connected_users.pop(user_socket_id)
         online_users -= 1
