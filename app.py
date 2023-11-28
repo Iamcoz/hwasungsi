@@ -73,7 +73,7 @@ def on_join(data):
         online_users += 1
         emit('update_online_count', online_users, broadcast=True)
         emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 들어왔습니다.', 'type': 'System'}, broadcast=True)
-웨
+
 @socketio.on('message')
 def handle_message(data):
     emit('message', data, broadcast=True)
