@@ -141,7 +141,8 @@ nav {
 	border: 3px solid #eafb77;
 	border-radius: 50%;
 	color: #fff;
-	height: 50px;
+	height: 35px;
+	border-radius: 50%;
 }
 
 .admin_button:hover {
@@ -166,9 +167,10 @@ nav {
 }
 
 .centered_box a {
-	width: 70%;
+	/* width: 70%; */
 	display: flex;
-	width: 30%;
+	/* width: 30%; */
+	align-items: center;
 }
 
 .fa-circle-chevron-left {
@@ -205,7 +207,6 @@ nav {
 	/* background-color: ghostwhite; */
 	/* width: 50%; */
 	/* margin-top: 20%; */
-	/* z-index: 300; */
 	width: 100vw;
 	height: 50vh;
 }
@@ -624,7 +625,7 @@ svg {
 	}
 
 	.centered_box .back {
-		height: 5%;
+		width: 60%;
 		margin-top: 0;
 	}
 
