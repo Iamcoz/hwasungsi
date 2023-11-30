@@ -141,7 +141,7 @@ nav {
 	border: 3px solid #eafb77;
 	border-radius: 50%;
 	color: #fff;
-	height: 35px;
+	height: 45px;
 	border-radius: 50%;
 }
 
@@ -149,7 +149,7 @@ nav {
 	background: #eafb77;
 	color: #68a26e;
 	border: 3px solid #eafb77;
-	height: 50px;
+	height: 45px;
 }
 
 .centered_box .back {
@@ -483,7 +483,7 @@ img.frog_img {
 }
 
 .btn {
-	width: 60%;
+	width: 80%;
 	border-radius: 40.591px;
 	font-size: 2rem;
 	font-weight: 500;
