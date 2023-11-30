@@ -13,11 +13,11 @@ socketio = SocketIO(app, cors_allowed_origins="*", ping_interval=5, ping_timeout
 online_users = 0
 connected_users = {}  # 사용자 관리를 위한 딕셔너리
 
-@app.route('/')
+# @app.route('/')
 @app.route('/index')
 def index():
     global online_users     # index에 접속한 session 수
-    if online_users > 30:  # 접속자 수가 30을 초과하는 경우
+    if online_users > 30:  # 동시 접속자 수가 30을 초과하는 경우
         return redirect(url_for('over_capacity'))   # over_capacity.html 로 리다이렉트
     
     user_id = request.args.get('user_id')
