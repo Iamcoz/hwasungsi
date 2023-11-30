@@ -120,21 +120,26 @@ nav {
 
 .centered_box .menu {
 	/* margin-left: -65%; */
-	margin-top: 4%;
+	/* margin-top: 4%; */
 	width: 90%;
 	display: flex;
 	justify-content: space-between;
 	/* cursor:pointer; */
 }
 
+.menu.column {
+    margin-top: 4%;
+}
+
 .admin_button {
 	background: #68a26e;
-	font-family: inter;
+	/* font-family: inter; */
 	font-weight: bolder;
 	padding-left: 2%;
 	padding-right: 2%;
 	padding-top: 1%;
 	border: 3px solid #eafb77;
+	border-radius: 50%;
 	color: #fff;
 	height: 50px;
 }
@@ -200,7 +205,7 @@ nav {
 	/* background-color: ghostwhite; */
 	/* width: 50%; */
 	/* margin-top: 20%; */
-	z-index: 300;
+	/* z-index: 300; */
 	width: 100vw;
 	height: 50vh;
 }
@@ -390,6 +395,7 @@ p.grad_text {
 	/* position: absolute; */
 	/* top: 10px; */
 	margin-left: 10%;
+	margin-top: 15%;
 	width: 80%;
 	height: 80%;
 	flex-shrink: 0;
@@ -439,7 +445,7 @@ p.grad_text {
 }
 
 img.frog_img {
-	transform: scale(2.1) translateY(48px);
+	transform: scale(2.1) translateY(18px);
 	width: 100%;
 }
 
@@ -469,16 +475,16 @@ img.frog_img {
 
 .button_area {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: center;
 	margin-top: 200px;
 	z-index: 100;
 }
 
 .btn {
-	width: 100%;
+	width: 60%;
 	border-radius: 40.591px;
-	font-size: 3rem;
+	font-size: 2rem;
 	font-weight: 500;
 	border: 3px solid #eafb77;
 	background: none;
@@ -605,6 +611,12 @@ svg {
 	margin: 5%;
 }
 
+@media (max-width: 1600px) {
+	.btn {
+		margin-top: 10%;
+	}
+}
+
 @media (max-width: 992px) {
 	.centered_box {
 		width: 70%;
@@ -680,7 +692,8 @@ svg {
 	}
 
 	.btn {
-		font-size: 3rem;
+		font-size: 2rem;
+		/* margin-top: 10%; */
 	}
 
 	.button-rainbow {
@@ -758,7 +771,8 @@ svg {
 	}
 
 	.button_area {
-		margin-top: 0;
+	margin-top: 30%;
+	/* margin-top: 0 ; */
 	}
 
 	.ground_area {
@@ -779,6 +793,7 @@ svg {
 
 	.btn {
 		font-size: 1rem;
+		margin-top: 20%;
 	}
 
 	.plants_area {
