@@ -38,7 +38,8 @@ def over_capacity():
 @socketio.on('connect')
 def on_connect():
     global online_users
-    online_users += 1
+    online_users = len(connected_users)  # 현재 접속자 수를 연결된 사용자 수로 업데이트
+    emit('update_online_count', online_users, broadcast=True)
 
 # 사용자가 채팅창 접속 시 호출
 @socketio.on('join')
@@ -49,7 +50,6 @@ def on_join(data):
     connected_users[user_socket_id] = user_nickname  # 사용자의 닉네임 저장
     emit('update_online_count', online_users, broadcast=True)
     emit('message', {'nickname': '', 'message': f'{user_nickname}님이 들어왔습니다.', 'type': 'System'}, broadcast=True)
-
 
 # 메시지 처리
 @socketio.on('message')
@@ -70,13 +70,15 @@ def client_disconnect(data):
 def on_disconnect():
     global online_users
     user_socket_id = request.sid
-    nickname = connected_users.pop(user_socket_id, None)  # 닉네임 제거
-    online_users -= 1
-    if online_users < 0:    # 음수 방지
-        online_users = 0
-    if nickname:
-        emit('message', {'nickname': '', 'message': f'{nickname}님이 나갔습니다.', 'type': 'System'}, broadcast=True)
-    emit('update_online_count', online_users, broadcast=True)
+    if user_socket_id in connected_users:
+        nickname = connected_users.pop(user_socket_id)  # 연결 해제된 클라이언트 닉네임 가져오기
+        online_users = len(connected_users)  # 현재 접속자 수를 연결된 사용자 수로 업데이트
+        if online_users < 0:  # 음수 방지
+            online_users = 0
+        emit('update_online_count', online_users, broadcast=True)
+        if nickname:
+            emit('message', {'nickname': '', 'message': f'{nickname}님이 나갔습니다.', 'type': 'System'}, broadcast=True)
+
 
 
 if __name__ == '__main__':
