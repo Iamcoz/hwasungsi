@@ -70,12 +70,14 @@ def client_disconnect(data):
 def on_disconnect():
     global online_users
     user_socket_id = request.sid
-    nickname = connected_users.pop(user_socket_id, "익명 사용자")  # 닉네임 제거
+    nickname = connected_users.pop(user_socket_id, None)  # 닉네임 제거
     online_users -= 1
     if online_users < 0:    # 음수 방지
         online_users = 0
-    emit('message', {'nickname': '', 'message': f'{nickname}님이 나갔습니다.', 'type': 'System'}, broadcast=True)
+    if nickname:
+        emit('message', {'nickname': '', 'message': f'{nickname}님이 나갔습니다.', 'type': 'System'}, broadcast=True)
     emit('update_online_count', online_users, broadcast=True)
+
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000)
