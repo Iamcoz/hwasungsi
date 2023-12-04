@@ -13,7 +13,7 @@ https://iamcoz.notion.site/HS-Front-End-3a5585a158414d1e9cbdb321879b5bbd?pvs=4
 
 ### Install 의존성 모듈 (requirements.txt)
 ```
-pip install flask flask_socketio eventlet pycryptodome
+pip install flask flask_socketio eventlet pycryptodome python-dotenv
 ```
 
 ### Run
