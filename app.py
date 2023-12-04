@@ -58,7 +58,6 @@ def handle_message(data):
     nickname = connected_users.get(user_socket_id, "익명")  # 닉네임 조회
     emit('message', {'nickname': nickname, 'message': data['message']}, broadcast=True)
 
-
 # 사용자가 웹페이지에서 나갔을 때 호출되는 함수 (클라이언트 측에서 명시적으로 발생)
 # => 남아있는 사람에게 메시지를 뿌려주는 용도로 필요함
 @socketio.on('client_disconnect')
@@ -72,13 +71,12 @@ def on_disconnect():
     user_socket_id = request.sid
     if user_socket_id in connected_users:
         nickname = connected_users.pop(user_socket_id)  # 연결 해제된 클라이언트 닉네임 가져오기
-        online_users = len(connected_users)  # 현재 접속자 수를 연결된 사용자 수로 업데이트
-        if online_users < 0:  # 음수 방지
-            online_users = 0
-        emit('update_online_count', online_users, broadcast=True)
-        if nickname:
-            emit('message', {'nickname': '', 'message': f'{nickname}님이 나갔습니다.', 'type': 'System'}, broadcast=True)
-
+        emit('message', {'nickname': '', 'message': f'{nickname}님이 나갔습니다.', 'type': 'System'}, broadcast=True)
+    
+    online_users = len(connected_users)  # 현재 접속자 수를 연결된 사용자 수로 업데이트
+    if online_users < 0:  # 음수 방지
+        online_users = 0
+    emit('update_online_count', online_users, broadcast=True)
 
 
 if __name__ == '__main__':
