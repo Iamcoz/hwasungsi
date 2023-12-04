@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     socket.on('update_online_count', function (count) {
-        // onlineCount.textContent = "현재 접속자 수: " + count + "명";
-        onlineCount.textContent = "현재 접속자 수: " + 0 + "명";
+        onlineCount.textContent = "현재 접속자 수: " + count + "명";
+        // onlineCount.textContent = "현재 접속자 수: " + 0 + "명";
     });
 
     // 소켓 연결에 대한 에러 처리
