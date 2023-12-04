@@ -30,15 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
         onlineCount.textContent = "현재 접속자 수: " + count + "명";
     });
 
-    document.getElementById('sendBtn').addEventListener('click', function () {
-        const message = chatInput.value.trim();
-        if (message) {
-            socket.emit('message', { nickname: userNickname, message: message });
-            chatInput.value = '';
-        }
-    });
-
-
     let userNickname = null;
     document.getElementById('startChat').addEventListener('click', function () {
         const nickname = document.getElementById('nickname-entry').value.trim();
@@ -58,13 +49,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // 메시지 전송
     document.getElementById('sendBtn').addEventListener('click', function () {
         const message = chatInput.value.trim();
         if (message) {
             socket.emit('message', { nickname: userNickname, message: message });
             chatInput.value = '';
+            chatInput.focus();  // 메시지 전송 후 다시 압력 필드에 포커스 맞춤
         }
-        chatInput.focus();
     });
     
     // Enter 키를 눌렀을 때 메시지 전송
@@ -74,12 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('sendBtn').click();
         }
     });
-
-    // window.addEventListener('beforeunload', function() {
-    //     if (userNickname) {
-    //         socket.emit('leave', { nickname: userNickname });
-    //     }
-    // });
 
     // 사용자가 브라우저 창이나 탭을 닫을 때의 이벤트 핸들러
     window.addEventListener('beforeunload', function () {

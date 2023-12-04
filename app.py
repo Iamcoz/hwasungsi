@@ -48,7 +48,7 @@ def on_join(data):
     user_socket_id = request.sid
     if user_socket_id not in connected_users:
         connected_users[user_socket_id] = data["nickname"]
-        online_users += 1
+        # online_users += 1
         emit('update_online_count', online_users, broadcast=True)
         emit('message', {'nickname': '', 'message': f'{data["nickname"]}님이 들어왔습니다.', 'type': 'System'}, broadcast=True)
 
@@ -56,7 +56,13 @@ def on_join(data):
 def handle_message(data):
     emit('message', data, broadcast=True)
 
-# 사용자가 웹페이지에서 나갔을 때 호출되는 함수
+# 사용자가 웹페이지에서 나갔을 때 호출되는 함수 (클라이언트 측에서 명시적으로 발생)
+# => 남아있는 사람에게 메시지를 뿌려주는 용도로 필요함
+@socketio.on('client_disconnect')
+def client_disconnect(data):
+    on_disconnect()
+
+# 소켓 연결 끊어졌을 때 자동으로 발생하는 이벤트
 @socketio.on('disconnect')
 def on_disconnect():
     global online_users
