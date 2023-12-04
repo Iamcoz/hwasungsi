@@ -36,7 +36,8 @@
       <section class="box">
         <div class="my-5 centered_box">
           <div class="menu column">
-            <a href="https://greencityhs.or.kr/" class="back col-lg-6"><img src="../static/assets/cityportal.png"></a> <!-- 시민포탈 -->
+            <a href="https://greencityhs.or.kr/" class="back col-lg-6"><img src="../static/assets/cityportal.png"></a>
+            <!-- 시민포탈 -->
 
             <button class="admin_button" onclick="window.location.href='https://hsgreenedu.or.kr:442/'">게시판</button>
             <!-- <button class="admin_button" onclick="window.location.href='http://localhost:3000'">게시판</button> -->
@@ -182,32 +183,31 @@
       // '+' 문자가 공백으로 변환된 것을 다시 '+'로 복원
       if (encryptedUserId) {
         encryptedUserId = encryptedUserId.replace(/ /g, '+');
+      } else {
+        // URL에서 user_id 파라미터가 없거나 공백일 경우 'null'로 설정
+        encryptedUserId = "null";
       }
 
       console.log("Encrypted User ID from URL: ", encryptedUserId); // 로그 찍기
 
       $('#goToWebGL').on('click', function () {
-        if (encryptedUserId) {
-          console.log("Sending AJAX request with: ", encryptedUserId); // AJAX 요청 데이터 로그
+        console.log("Sending AJAX request with: ", encryptedUserId); // AJAX 요청 데이터 로그
 
-          $.ajax({
-            url: 'https://hsgreenedu.or.kr:442/api/validateUserId',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ userId: encryptedUserId }),
-            success: function (response) {
-              console.log("Response from server: ", response); // 성공 응답 로그
-              window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encryptedUserId;
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-              console.log("AJAX error: ", textStatus, "; Error thrown: ", errorThrown, "; jqXHR: ", jqXHR); // 오류 정보 로그
-              alert('유효하지 않은 사용자 아이디입니다.');
-              window.location.href = 'https://greencityhs.or.kr';
-            }
-          });
-        } else {
-          alert('오류가 발생했습니다.');
-        }
+        $.ajax({
+          url: 'https://hsgreenedu.or.kr:442/api/validateUserId',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({ userId: encryptedUserId }),
+          success: function (response) {
+            console.log("Response from server: ", response); // 성공 응답 로그
+            window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encryptedUserId;
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log("AJAX error: ", textStatus, "; Error thrown: ", errorThrown, "; jqXHR: ", jqXHR); // 오류 정보 로그
+            alert('유효하지 않은 사용자 아이디입니다.');
+            window.location.href = 'https://greencityhs.or.kr';
+          }
+        });
       });
     });
   </script>
