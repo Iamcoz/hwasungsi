@@ -66,35 +66,49 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('sendBtn').disabled = false;
     });
 
-
     let userNickname = null;
     document.getElementById('startChat').addEventListener('click', function () {
         const nickname = document.getElementById('nickname-entry').value.trim();
 
-        if (nickname) {
+        // Check if the nickname contains any bad words
+        if (BadWordFilter.Check(nickname, 'ko')) {
+            // Handle the case where the nickname contains bad words (e.g., show an error message)
+            // You can add your error handling logic here
+        } else {
+            userNickname = filterNickname(nickname);
 
-            userNickname = nickname;  // 서버에 전달할 닉네임 저장
+            if (userNickname) {
+                // Hide entry box and show chat box
+                document.getElementById('entry-box').style.display = 'none';
+                document.getElementById('chat-box').style.display = 'block';
 
-            // Hide entry box and show chat box
-            document.getElementById('entry-box').style.display = 'none';
-            document.getElementById('chat-box').style.display = 'block';
+                // Show chat input
+                document.querySelector('.chat-input').style.display = 'flex';
 
-            // Show chat input
-            document.querySelector('.chat-input').style.display = 'flex';
-
-            socket.emit('join', { nickname: nickname });
+                socket.emit('join', { nickname: userNickname });
+            }
         }
     });
+
 
     // 메시지 전송
     document.getElementById('sendBtn').addEventListener('click', function () {
         const message = chatInput.value.trim();
-        if (message) {
-            socket.emit('message', { nickname: userNickname, message: message });
+
+        // Check if the message contains any bad words
+        if (BadWordFilter.Check(message, 'ko')) {
+            // Handle the case where the message contains bad words (e.g., show an error message)
+            // You can add your error handling logic here
+        } else {
+            // Replace bad words with '♡'
+            const filteredMessage = BadWordFilter.Replace(message, 'ko');
+
+            socket.emit('message', { nickname: userNickname, message: filteredMessage });
             chatInput.value = '';
-            chatInput.focus();  // 메시지 전송 후 다시 압력 필드에 포커스 맞춤
+            chatInput.focus();  // 메시지 전송 후 다시 입력 필드에 포커스 맞춤
         }
     });
+
 
     // Enter 키를 눌렀을 때 메시지 전송
     chatInput.addEventListener('keydown', function (event) {
@@ -111,5 +125,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-
-
