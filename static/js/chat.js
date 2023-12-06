@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     socket.on('update_online_count', function (count) {
-        onlineCount.textContent = "현재 접속자 수: " + count + "명";
+        onlineCount.textContent = "현재 접속자 수: " + (count+1) + "명";
         // onlineCount.textContent = "현재 접속자 수: " + 0 + "명";
     });
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('Connected to server');
         const disconnectMessage = document.createElement('div');
         disconnectMessage.classList.add('system-message');
-        disconnectMessage.textContent = "서버와 연결되었습니다.";
+        // disconnectMessage.textContent = "서버와 연결되었습니다.";
         chatMessages.appendChild(disconnectMessage);
 
         // 채팅 입력창 활성화
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('sendBtn').click();
         }
     });
-    
+
     // 사용자가 브라우저 창이나 탭을 닫을 때의 이벤트 핸들러
     window.addEventListener('beforeunload', function () {
         if (userNickname) {
