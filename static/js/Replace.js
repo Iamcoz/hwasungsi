@@ -82,7 +82,7 @@ BadWordFilter.Replace = METHOD({
 				
 				// 영어의 경우 절반 길이로 하트 표시
 				REPEAT(language === 'en' ? Math.ceil(badWord.length / 2) : badWord.length, () => {
-					newWord += '♡';
+					newWord += '*';
 				});
 				
 				check(badWord, newWord);

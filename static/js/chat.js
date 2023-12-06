@@ -90,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-
     // 메시지 전송
     document.getElementById('sendBtn').addEventListener('click', function () {
         const message = chatInput.value.trim();

@@ -5,29 +5,29 @@ BadWordFilter.Check = METHOD({
 
 	run: (params) => {
 		//REQUIRED: params
-		//REQUIRED: params.text
+		//REQUIRED: params.message
 		//REQUIRED: params.language
 
-		let text = params.text;
+		let message = params.message;
 		let language = params.language;
 
 		let db = BadWordFilter.DB[language];
 
-		if (text !== undefined && text !== TO_DELETE && db !== undefined) {
+		if (message !== undefined && message !== TO_DELETE && db !== undefined) {
 			let isBadWordExists = false;
 
 			let check = (badWord) => {
-				for (let i = 0; i < text.length; i += 1) {
+				for (let i = 0; i < message.length; i += 1) {
 					let isMatched = true;
 					let spaceCount = 0;
 					let fcCount = 0;
 
 					for (let j = 0; j < badWord.length; j += 1) {
-						if (i + j + fcCount >= text.length) {
+						if (i + j + fcCount >= message.length) {
 							isMatched = false;
 							break;
 						} else {
-							let c = text[i + j + fcCount];
+							let c = message[i + j + fcCount];
 
 							// 영어가 아닌 경우 띄어쓰기 무시
 							if (language !== 'en' && c === ' ') {
@@ -54,8 +54,8 @@ BadWordFilter.Check = METHOD({
 						// 영어의 경우 좌우가 문자열의 끝이거나 띄어쓰기가 있어야 함
 						// 대소문자로 단어 체크
 						if (language === 'en') {
-							if ((start === 0 || text[start - 1] === ' ' || (text[start - 1] === text[start - 1].toLowerCase() && text[start] === text[start].toUpperCase())) &&
-								(last + 1 === text.length || text[last + 1] === ' ' || (text[last] === text[last].toLowerCase() && text[last + 1] === text[last + 1].toUpperCase()))) {
+							if ((start === 0 || message[start - 1] === ' ' || (message[start - 1] === message[start - 1].toLowerCase() && message[start] === message[start].toUpperCase())) &&
+								(last + 1 === message.length || message[last + 1] === ' ' || (message[last] === message[last].toLowerCase() && message[last + 1] === message[last + 1].toUpperCase()))) {
 								isBadWordExists = true;
 								return;
 							}
@@ -64,8 +64,8 @@ BadWordFilter.Check = METHOD({
 						// 한국어의 경우 띄어쓰기가 있을 때 좌우에 띄어쓰기가 없으면 무시
 						else if (language === 'ko') {
 							if (spaceCount === 0 || (
-									(start === 0 || text[start - 1] === ' ') &&
-									(last + 1 === text.length || text[last + 1] === ' '))) {
+									(start === 0 || message[start - 1] === ' ') &&
+									(last + 1 === message.length || message[last + 1] === ' '))) {
 								isBadWordExists = true;
 								return;
 							}
