@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error('Connection Error:', error);
         const errorMessage = document.createElement('div');
         errorMessage.classList.add('system-message'); // 시스템 메시지 스타일 적용
-        errorMessage.textContent = "서버와의 연결이 끊어졌습니다.";
+        // errorMessage.textContent = "서버와의 연결이 끊어졌습니다.";
         chatMessages.appendChild(errorMessage);
     });
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('Connected to server');
         const disconnectMessage = document.createElement('div');
         disconnectMessage.classList.add('system-message');
-        // disconnectMessage.textContent = "서버와 연결되었습니다.";
+        disconnectMessage.textContent = "서버와 연결되었습니다.";
         chatMessages.appendChild(disconnectMessage);
 
         // 채팅 입력창 활성화
