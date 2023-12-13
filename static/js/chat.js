@@ -85,7 +85,12 @@ document.addEventListener("DOMContentLoaded", function () {
             nicknameInput.placeholder = '닉네임 입력'; // 기본 플레이스홀더로 복원
             nicknameInput.classList.remove('error'); // 오류 스타일 제거 (옵션)
             userNickname = nickname;
-            // 나머지 채팅창 진입 로직
+
+            // 채팅창으로 진입
+            document.getElementById('entry-box').style.display = 'none';
+            document.getElementById('chat-box').style.display = 'block';
+            document.querySelector('.chat-input').style.display = 'flex';
+            socket.emit('join', { nickname: nickname });
         }
     });
     
