@@ -1,3 +1,5 @@
+import badWords from './badWordList.js';
+
 document.addEventListener("DOMContentLoaded", function () {
     const socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
@@ -72,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const nickname = nicknameInput.value.trim();
     
         // 비속어 리스트 불러오기 및 검사 로직
-        const badWords = BadWordFilter.DB['ko'];
         let containsBadWord = badWords.some(badWord => nickname.includes(badWord));
     
         if (containsBadWord) {
