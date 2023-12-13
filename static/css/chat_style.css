@@ -73,6 +73,10 @@
     text-align: center;
 }
 
+input.error {
+    border-color: rgb(208, 42, 42); /* 오류가 있는 필드에 빨간색 테두리 적용 */
+}
+
 /* 모바일 화면에서 적용될 스타일 */
 @media only screen and (max-width: 600px) {
     #chat-box, .chat-input, #entry-box {

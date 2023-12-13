@@ -68,18 +68,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let userNickname = null;
     document.getElementById('startChat').addEventListener('click', function () {
-        const nickname = document.getElementById('nickname-entry').value.trim();
-        if (nickname) {
-            userNickname = nickname;  // 서버에 전달할 닉네임 저장
-            // Hide entry box and show chat box
-            document.getElementById('entry-box').style.display = 'none';
-            document.getElementById('chat-box').style.display = 'block';
-            // Show chat input
-            document.querySelector('.chat-input').style.display = 'flex';
-            socket.emit('join', { nickname: nickname });
+        const nicknameInput = document.getElementById('nickname-entry');
+        const nickname = nicknameInput.value.trim();
+    
+        // 비속어 리스트 불러오기 및 검사 로직
+        const badWords = BadWordFilter.DB['ko'];
+        let containsBadWord = badWords.some(badWord => nickname.includes(badWord));
+    
+        if (containsBadWord) {
+            // 닉네임 입력 필드에 오류 메시지 표시
+            nicknameInput.value = ''; // 입력 필드 초기화
+            nicknameInput.placeholder = '사용할 수 없는 닉네임입니다.';
+            nicknameInput.classList.add('error'); // 오류 스타일 적용 (옵션)
+        } else {
+            nicknameInput.placeholder = '닉네임 입력'; // 기본 플레이스홀더로 복원
+            nicknameInput.classList.remove('error'); // 오류 스타일 제거 (옵션)
+            userNickname = nickname;
+            // 나머지 채팅창 진입 로직
         }
     });
-
+    
     // 메시지 전송
     document.getElementById('sendBtn').addEventListener('click', function () {
         const message = chatInput.value.trim();
