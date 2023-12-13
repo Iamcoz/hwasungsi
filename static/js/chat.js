@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('Connected to server');
         const disconnectMessage = document.createElement('div');
         disconnectMessage.classList.add('system-message');
-        disconnectMessage.textContent = "서버와 연결되었습니다.";
+        // disconnectMessage.textContent = "서버와 연결되었습니다.";
         chatMessages.appendChild(disconnectMessage);
 
         // 채팅 입력창 활성화
@@ -96,11 +96,26 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // 메시지 전송
     document.getElementById('sendBtn').addEventListener('click', function () {
-        const message = chatInput.value.trim();
-        if (message) {
+        const messageInput = document.getElementById('message');
+        const message = messageInput.value.trim();
+
+        // 비속어 리스트 불러오기 및 검사 로직
+        let containsBadWord = badWords.some(badWord => message.includes(badWord));
+
+        if (containsBadWord) {
+            // 메시지 입력 필드에 오류 메시지 표시
+            messageInput.value = '비속어가 포함된 메시지는 전송이 불가합니다.';
+            messageInput.classList.add('error'); // 오류 스타일 적용 (옵션)
+            setTimeout(() => {
+                messageInput.value = ''; // 입력 필드 초기화
+                messageInput.placeholder = '메시지 입력'; // 기본 플레이스홀더로 복원
+                messageInput.classList.remove('error'); // 오류 스타일 제거 (옵션)
+            }, 2000); // 2초 후에 메시지와 오류 스타일 초기화
+        } else {
+            // 비속어가 없는 경우 메시지 전송
             socket.emit('message', { nickname: userNickname, message: message });
-            chatInput.value = '';
-            chatInput.focus();  // 메시지 전송 후 다시 압력 필드에 포커스 맞춤
+            messageInput.value = '';
+            messageInput.focus(); // 메시지 전송 후 다시 입력 필드에 포커스 맞춤
         }
     });
 

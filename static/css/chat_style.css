@@ -73,8 +73,8 @@
     text-align: center;
 }
 
-input.error {
-    border-color: rgb(208, 42, 42); /* 오류가 있는 필드에 빨간색 테두리 적용 */
+.error {
+    border-color: rgb(208, 42, 42);
 }
 
 /* 모바일 화면에서 적용될 스타일 */
