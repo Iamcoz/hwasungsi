@@ -1,4 +1,4 @@
-import badWords from './badWordList.js';
+import badWords from './badWordsList.js';
 
 document.addEventListener("DOMContentLoaded", function () {
     const socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);

@@ -1,5 +1,5 @@
-import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
-import {TrackballControls} from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/TrackballControls.js";
+// import * as THREE from "https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js";
+// import {TrackballControls} from "https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/TrackballControls.js";
 
 function main() {
     // Create a canvas element for rendering
