@@ -39,7 +39,7 @@
             <a href="https://greencityhs.or.kr/" class="back col-lg-6"><img src="../static/assets/cityportal.png"></a>
             <!-- 시민포탈 -->
 
-            <button class="admin_button" onclick="window.location.href='https://hsgreenedu.or.kr/'">게시판</button>
+            <button class="admin_button" onclick="window.location.href='https://hsgreenedu.or.kr:442/'">게시판</button>
             <!-- <button class="admin_button" onclick="window.location.href='http://localhost:3000'">게시판</button> -->
           </div>
           <div class="menu row justify-content-center text_area">
@@ -200,13 +200,13 @@
         console.log("Sending AJAX request with: ", encryptedUserId); // AJAX 요청 데이터 로그
 
         $.ajax({
-          url: 'https://hsgreenedu.or.kr/api/validateUserId',
+          url: 'https://hsgreenedu.or.kr:442/api/validateUserId',
           type: 'POST',
           contentType: 'application/json',
           data: JSON.stringify({ userId: encryptedUserId }),
           success: function (response) {
             console.log("Response from server: ", response); // 성공 응답 로그
-            window.location.href = 'https://hsgreenedu.or.kr/webgl?user_id=' + encryptedUserId;
+            window.location.href = 'https://hsgreenedu.or.kr:442/webgl?user_id=' + encryptedUserId;
           },
           error: function (jqXHR, textStatus, errorThrown) {
             console.log("AJAX error: ", textStatus, "; Error thrown: ", errorThrown, "; jqXHR: ", jqXHR); // 오류 정보 로그
