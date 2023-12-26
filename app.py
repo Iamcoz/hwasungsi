@@ -12,8 +12,9 @@ socketio = SocketIO(app, cors_allowed_origins="*", ping_interval=5, ping_timeout
 webgl_online_users = 0  # WebGL 페이지의 동시 접속자 수
 connected_users = {}  # 소켓 ID와 닉네임을 연결하기 위한 딕셔너리
 
-# @app.route('/')
-@app.route('/index')
+
+# @app.route('/index')
+@app.route('/')
 def index():
     return render_template('index.html')
 
